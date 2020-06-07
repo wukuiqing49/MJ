@@ -1,0 +1,3 @@
+rootProject.name='MJ'
+include ':app'
+include ':lib_common', ':lib_greendao', ':lib_database'

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_white"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/includeToolbar"
+            layout="@layout/layout_back_toolbar" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/sc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/includeToolbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="102dp"
+                    android:background="@mipmap/ic_launcher"
+                    android:scaleType="centerCrop" />
+
+
+                <RelativeLayout
+
+                    android:id="@+id/layout_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="62dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginRight="50dp">
+
+                    <TextView
+                        android:id="@+id/tv_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="手机号:"
+                        android:textColor="@color/color_333"
+                        android:textSize="17sp" />
+
+
+                    <EditText
+                        android:id="@+id/et_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/tv_num"
+                        android:background="@null"
+                        android:focusableInTouchMode="true"
+                        android:hint="请输入手机号"
+                        android:imeOptions="flagNoFullscreen|flagNoExtractUi"
+                        android:inputType="number"
+                        android:maxLength="11"
+                        android:maxLines="1"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/color_333"
+                        android:textColorHint="@color/color_666"
+                        android:textCursorDrawable="@drawable/edit_cursor"
+                        android:textSize="14sp" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="62dp"
+                    android:layout_marginRight="50dp"
+                    android:background="@color/color_999" />
+
+                <RelativeLayout
+                    android:id="@+id/layout_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="62dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginRight="50dp">
+
+                    <TextView
+                        android:id="@+id/tv_pw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="密    码:"
+                        android:textColor="@color/color_333"
+                        android:textSize="17sp" />
+
+                    <EditText
+                        android:id="@+id/et_pwd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_toRightOf="@+id/tv_pw"
+                        android:background="@null"
+                        android:focusableInTouchMode="true"
+                        android:hint="请输入密码"
+                        android:imeOptions="flagNoFullscreen|flagNoExtractUi"
+                        android:inputType="textPassword"
+                        android:maxLength="6"
+                        android:maxLines="1"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/color_333"
+                        android:textColorHint="@color/color_666"
+                        android:textCursorDrawable="@drawable/edit_cursor"
+                        android:textSize="14sp" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="62dp"
+                    android:layout_marginRight="50dp"
+                    android:background="@color/color_999" />
+
+                <Button
+                    android:id="@+id/bt_login"
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="45dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="62dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginRight="50dp"
+                    android:background="@drawable/view_button_bg"
+                    android:text="登录"
+                    android:textColor="@color/color_white"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_regist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+
+
+                    android:padding="10dp"
+
+                    android:text="暂无账号,请先注册!!"
+                    android:textColor="@color/color_23d41e"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_loading"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerInParent="true"
+            android:background="@color/color_333"
+            android:clickable="true"
+
+            android:visibility="gone">
+
+
+            <com.tuyenmonkey.mkloader.MKLoader
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="24dp"
+                app:mk_type="TwinFishesSpinner" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

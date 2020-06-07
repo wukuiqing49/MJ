@@ -1,0 +1,17 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.wu.common">
+
+    <application>
+        <activity android:name=".module.ui.FinishAllActivity"/>
+        <activity
+            android:name=".module.ui.WebViewActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            tools:ignore="LockedOrientationActivity" />
+    </application>
+
+</manifest>

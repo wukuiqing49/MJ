@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="CustomDialogStyleMediaPicker" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
+
+    <style name="CustomDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item><!--边框-->
+        <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
+        <item name="android:windowIsTranslucent">false</item><!--半透明-->
+        <item name="android:windowNoTitle">true</item><!--无标题-->
+        <item name="android:windowBackground">@color/transparent</item><!--背景透明-->
+        <item name="android:backgroundDimEnabled">false</item><!--模糊-->
+    </style>
+
+    <style name="BaseAppTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/launch_qk2</item>
+    </style>
+
+    <style name="AppTheme" parent="QMUI.Compat.NoActionBar">
+        <item name="QMUITopBarStyle">@style/QDTopBar</item>
+
+    </style>
+
+    <style name="QDTopBar" parent="QMUI.TopBar">
+        <item name="qmui_topbar_separator_color">#c3c3c3</item>
+        <item name="qmui_topbar_bg_color">@color/color_2b2b2b</item>
+        <item name="qmui_topbar_title_color">@color/color_white</item>
+        <item name="qmui_topbar_subtitle_color">@color/color_white</item>
+        <item name="qmui_topbar_height">48dp</item>
+        <item name="qmui_topbar_image_btn_height">48dp</item>
+    </style>
+
+
+</resources>
