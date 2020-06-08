@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -9,14 +10,59 @@
         <com.youth.banner.Banner xmlns:banner="http://schemas.android.com/apk/res-auto"
             android:id="@+id/banner_movies"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="200dp"
 
             banner:indicator_normal_color="@android:color/white"
             banner:indicator_selected_color="@color/color_2b2b2b" />
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/banner_movies"
+            android:layout_marginTop="20dp">
 
 
+            <TextView
+                android:id="@+id/tv_chapter"
+                android:padding="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/shape_home_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="章节练习"
+                android:textColor="@color/color_333" />
+
+            <TextView
+                android:id="@+id/tv_topic"
+                android:layout_marginTop="10dp"
+                android:padding="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/shape_home_bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="历年真题"
+                android:textColor="@color/color_333" />
+
+            <TextView
+                android:id="@+id/tv_exam"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/shape_home_bg"
+                android:text="模拟考试"
+                android:textColor="@color/color_333" />
+
+
+        </LinearLayout>
 
 
     </RelativeLayout>

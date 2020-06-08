@@ -35,7 +35,6 @@ class LoginView : MvpView, View.OnClickListener {
 
     fun initView() {
         initToolBar("登录")
-
         mActivity!!.binding.tvRegist.setOnClickListener(this)
         mActivity!!.binding.btLogin.setOnClickListener(this)
     }
@@ -84,6 +83,7 @@ class LoginView : MvpView, View.OnClickListener {
         }
 
         if (DataBaseUtils.checkUser(mActivity, mActivity!!.binding.etPhone.text.toString(), mActivity!!.binding.etPwd.text.toString())) {
+            DataBaseUtils.insertLoginState(mActivity, mActivity!!.binding.etPhone.text.toString(), true)
             mActivity!!.presenter.startTimer()
         } else {
             showMessage("密码错误")
@@ -92,11 +92,11 @@ class LoginView : MvpView, View.OnClickListener {
 
     }
 
-    fun showLoaiding(show:Boolean){
-        if(show){
-            mActivity!!.binding.rlLoading.visibility=View.VISIBLE
-        }else{
-            mActivity!!.binding.rlLoading.visibility=View.GONE
+    fun showLoaiding(show: Boolean) {
+        if (show) {
+            mActivity!!.binding.rlLoading.visibility = View.VISIBLE
+        } else {
+            mActivity!!.binding.rlLoading.visibility = View.GONE
         }
 
     }

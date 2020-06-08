@@ -82,5 +82,19 @@ public class DataBaseUtils {
         return false;
     }
 
+    /**
+     * 设置登录状态
+     *
+     * @param context
+     * @param phoneNum
+     * @param isLogin
+     */
+    public static void insertLoginState(Context context, String phoneNum, boolean isLogin) {
+        UserInfoDao dao = DaoHelper.getInstance(context).getUserInfoDao();
+        UserInfo info = dao.load(phoneNum);
+        if (info != null) info.setIsLogout(isLogin);
+
+    }
+
 
 }

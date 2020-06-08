@@ -99,8 +99,8 @@ class LaunchView : MvpView {
 
         var intent: Intent = Intent();
         if (DataBaseUtils.isLogin(mContext)) {
-//            intent.setClass(mContext, MainActivity().javaClass)
-            intent.setClass(mContext, LoginActivity().javaClass)
+            intent.setClass(mContext, MainActivity().javaClass)
+//            intent.setClass(mContext, LoginActivity().javaClass)
             mContext.startActivity(intent)
         } else {
             intent.setClass(mContext, LoginActivity().javaClass)
