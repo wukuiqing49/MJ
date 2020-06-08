@@ -25,7 +25,6 @@ class HomeFragment : MvpBindingFragment<HomeView, HomePresenter, FragmentHomeBin
     companion object {
         fun newInstance(): HomeFragment {
             var bandle: Bundle = Bundle()
-
             var home: HomeFragment = HomeFragment()
             home.arguments = bandle
             return home
