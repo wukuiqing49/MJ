@@ -1,4 +1,8 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-kapt'//需要使用kapt作为注解 处理器
+kapt {
+    generateStubs = true
+}
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
@@ -108,6 +112,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlin_version"
     implementation "androidx.core:core-ktx:$core_ktx"
+    kapt "com.android.databinding:compiler:3.0.1"
+
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.multidex:multidex:2.0.0'
     implementation "com.scwang.smartrefresh:SmartRefreshLayout:$rootProject.SmartRefreshLayout"

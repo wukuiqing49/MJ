@@ -7,8 +7,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.wu.mj.module.home.frame.model.QuestionInfo;
 import com.wu.mj.module.home.ui.fragment.HomeFragment;
+import com.wu.mj.module.home.ui.fragment.QuestionsDetailFragment;
 import com.wu.mj.module.mine.ui.fragment.MineFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -23,10 +28,14 @@ import com.wu.mj.module.mine.ui.fragment.MineFragment;
 public class QuestionsFragmentPagerAdapter extends FragmentPagerAdapter {
 
     Context context;
+    List<QuestionInfo> mFragents = new ArrayList<>();
+    String title;
 
-    public QuestionsFragmentPagerAdapter(Context context, @NonNull FragmentManager fm) {
+    public QuestionsFragmentPagerAdapter(Context context, @NonNull FragmentManager fm, String title, List<QuestionInfo> list) {
         super(fm);
         this.context = context;
+        this.title = title;
+        mFragents=list;
     }
 
     @NonNull
@@ -34,26 +43,14 @@ public class QuestionsFragmentPagerAdapter extends FragmentPagerAdapter {
 
     public Fragment getItem(int position) {
 
-        Fragment fragment = null;
+        Fragment fragment = QuestionsDetailFragment.Companion.newInstance(title, mFragents.get(position));
 
-        switch (position) {
-
-            case 0:
-                fragment = HomeFragment.Companion.newInstance();
-                break;
-            case 1:
-                fragment = MineFragment.Companion.newInstance();
-                break;
-            case 2:
-                fragment = MineFragment.Companion.newInstance();
-                break;
-        }
 
         return fragment;
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return mFragents.size();
     }
 }

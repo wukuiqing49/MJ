@@ -5,6 +5,7 @@ import android.view.View
 import com.wkq.base.frame.fragment.MvpBindingFragment
 import com.wu.mj.R
 import com.wu.mj.databinding.FragmentQuestionsDetailBinding
+import com.wu.mj.module.home.frame.model.QuestionInfo
 import com.wu.mj.module.home.frame.presenter.QuestionsDetailPresenter
 import com.wu.mj.module.home.frame.view.QuestionsDetailView
 
@@ -20,14 +21,15 @@ import com.wu.mj.module.home.frame.view.QuestionsDetailView
 
 class QuestionsDetailFragment : MvpBindingFragment<QuestionsDetailView, QuestionsDetailPresenter, FragmentQuestionsDetailBinding>() {
 
-    var index: String? = null
+    var title: String? = null
+    var info: QuestionInfo? = null
 
     companion object {
-        fun newInstance(title: String, index: String): QuestionsDetailFragment {
+        fun newInstance(title: String, index: QuestionInfo?): QuestionsDetailFragment {
             var bandle: Bundle = Bundle()
             var home: QuestionsDetailFragment = QuestionsDetailFragment()
             bandle.putString("title", title)
-            bandle.putString("index", index)
+            bandle.putSerializable("info", index)
             home.arguments = bandle
             return home
         }
@@ -39,7 +41,10 @@ class QuestionsDetailFragment : MvpBindingFragment<QuestionsDetailView, Question
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (presenter != null) presenter.getQuestionData(activity, index)
+        info = arguments!!.getSerializable("info") as QuestionInfo
+        if(mvpView!=null)mvpView.initView()
+        if (presenter != null) presenter.getQuestionData(activity, info!!.id)
+        binding.data = info
     }
 
 

@@ -1,6 +1,7 @@
 package com.wu.mj.module.home.frame.presenter
 
 import com.wkq.base.frame.mosby.MvpBasePresenter
+import com.wu.mj.module.home.frame.model.QuestionInfo
 import com.wu.mj.module.home.frame.view.QuestionsInfoView
 import com.wu.mj.module.home.ui.activity.QuestionsInfoActivity
 import com.wu.mj.utlis.DBUtlis
@@ -15,12 +16,13 @@ import com.wu.mj.utlis.DBUtlis
  */
 
 
-class QuestionsInfoPresenter :MvpBasePresenter<QuestionsInfoView>() {
+class QuestionsInfoPresenter : MvpBasePresenter<QuestionsInfoView>() {
     fun getQuestions(questionsInfoActivity: QuestionsInfoActivity, index: String?) {
 
-       var db= DBUtlis(questionsInfoActivity)
-        if (db.database.isOpen){
-            db.getQuestionList(index)
+        var db = DBUtlis(questionsInfoActivity)
+        if (db.database.isOpen) {
+            var questions = db.getQuestionList(index)
+            if(view!=null)view.showData(questions)
         }
 
     }

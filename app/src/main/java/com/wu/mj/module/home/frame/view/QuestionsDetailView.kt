@@ -1,6 +1,15 @@
 package com.wu.mj.module.home.frame.view
 
+import android.content.Context
+import android.text.TextUtils
+import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.wkq.base.frame.mosby.delegate.MvpView
+import com.wkq.lib_base.adapter.KtDataBindingAdapter
+import com.wu.common.utils.AlertUtil
+import com.wu.mj.R
+import com.wu.mj.module.home.frame.model.AnwserInfo
+import com.wu.mj.module.home.ui.adapter.QuestionAnwserAdapter
 import com.wu.mj.module.home.ui.fragment.QuestionsDetailFragment
 
 /**
@@ -14,10 +23,37 @@ import com.wu.mj.module.home.ui.fragment.QuestionsDetailFragment
 
 
 class QuestionsDetailView : MvpView {
-
+    var mAdapter: QuestionAnwserAdapter? = null
     var mFragment: QuestionsDetailFragment
 
     constructor(mFragment: QuestionsDetailFragment) {
         this.mFragment = mFragment
     }
+
+    fun initView() {
+        mAdapter = QuestionAnwserAdapter(mFragment.activity as Context, R.layout.item_anwers)
+        mFragment.binding.rvContent.layoutManager = LinearLayoutManager(mFragment.activity)
+        mFragment.binding.rvContent.adapter = mAdapter
+
+        mAdapter!!.setOnViewClickListener(object : KtDataBindingAdapter.OnAdapterViewClickListener<AnwserInfo> {
+            override fun onViewClick(v: View?, program: AnwserInfo?) {
+                showMessage(program!!.anwer)
+
+
+            }
+
+        })
+    }
+
+    fun showData(anwers: List<AnwserInfo>) {
+        mAdapter!!.addItems(anwers.toMutableList())
+    }
+
+
+    fun showMessage(message: String?) {
+        if (TextUtils.isEmpty(message) || mFragment.activity == null) return
+        AlertUtil.showDeftToast(mFragment.activity, message)
+
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.wu.mj.module.home.frame.model
 
+import java.io.Serializable
+
 /**
  *
  * 作者:吴奎庆
@@ -10,7 +12,7 @@ package com.wu.mj.module.home.frame.model
  */
 
 
-class QuestionInfo {
+class QuestionInfo : Serializable {
     var id: String? = null
     var title: String? = null
     var index: String? = null

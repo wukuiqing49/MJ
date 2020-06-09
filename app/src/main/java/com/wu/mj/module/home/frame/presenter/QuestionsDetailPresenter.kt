@@ -3,6 +3,7 @@ package com.wu.mj.module.home.frame.presenter
 import android.content.Context
 import com.wkq.base.frame.mosby.MvpBasePresenter
 import com.wu.mj.module.home.frame.view.QuestionsDetailView
+import com.wu.mj.utlis.DBUtlis
 
 /**
  *
@@ -16,8 +17,12 @@ import com.wu.mj.module.home.frame.view.QuestionsDetailView
 
 class QuestionsDetailPresenter : MvpBasePresenter<QuestionsDetailView>() {
 
-    fun getQuestionData(context: Context?, index: String?) {
-
+    fun getQuestionData(context: Context?, problemId: String?) {
+        var db = DBUtlis(context)
+        if (db.database.isOpen) {
+            var anwers = db.getAnwserList(problemId)
+            if (view != null) view.showData(anwers)
+        }
 
     }
 
