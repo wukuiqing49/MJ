@@ -167,7 +167,7 @@ public class DBUtlis extends SQLiteOpenHelper {
             ChapterInfo info = new ChapterInfo();
             String id = cursor.getString(cursor.getColumnIndex("id"));
             String title = cursor.getString(cursor.getColumnIndex("title"));
-            String index = cursor.getString(cursor.getColumnIndex("index"));
+            String index = cursor.getString(cursor.getColumnIndex("chapter_index"));
             info.setId(id);
             info.setIndex(index);
             info.setProgress(0);
@@ -180,42 +180,40 @@ public class DBUtlis extends SQLiteOpenHelper {
 
     /**
      * 获学习章节的目录数据
+     * Cursor cursor = sqliteDatabase.query("user", new String[] { "id","name" }, "id=?", new String[] { "1" }, null, null, null
+     * 第一个参数String：表名
+     * 第二个参数String[]:要查询的列名 new String[] { "id""name" }
+     * 第三个参数String：查询条件  "id=?"
+     * 第四个参数String[]：查询条件的参数  new String[] { "1" }
+     * 第五个参数String:对查询的结果进行分组
+     * 第六个参数String：对分组的结果进行限制
+     * 第七个参数String：对查询的结果进行排序
      *
      * @return
      */
     public List<QuestionInfo> getQuestionList(String index) {
 
-        // 第一个参数String：表名
-        // 第二个参数String[]:要查询的列名 new String[] { "id",
-        ////                "name" }
-        // 第三个参数String：查询条件  "id=?"
-        // 第四个参数String[]：查询条件的参数  new String[] { "1" }
-        // 第五个参数String:对查询的结果进行分组
-        // 第六个参数String：对分组的结果进行限制
-        // 第七个参数String：对查询的结果进行排序
-//        Cursor cursor = sqliteDatabase.query("user", new String[] { "id",
-//                "name" }, "id=?", new String[] { "1" }, null, null, null);
-//        // 将光标移动到下一行，从而判断该结果集是否还有下一条数据，如果有则返回true，没有则返回false
-//        while (cursor.moveToNext()) {
-//            id = cursor.getString(cursor.getColumnIndex("id"));
-//            name = cursor.getString(cursor.getColumnIndex("name"));
-//        }
-
         List<QuestionInfo> infos = new ArrayList<>();
 
-        Cursor cursor = dbObj.query("problem", null, "exam_id=?", new String[]{index}, null, null, null);
-        // 将光标移动到下一行，从而判断该结果集是否还有下一条数据，如果有则返回true，没有则返回false
+        int myChapterIndex = Integer.parseInt(index) * 3;
+
+        //章节部分数据是  exam_id  分三部分
+//        String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer FROM chapter,section,problem WHERE chapter.id=section.chapter_id and section.exam_id=problem.exam_id  and section.chapter_id =? ORDER BY problem.id";
+
+        String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer FROM problem  JOIN section  JOIN chapter ON chapter.id=section.chapter_id and section.exam_id=problem.exam_id  and section.chapter_id =? ORDER BY problem.id;\n";
+        String[] selectionArgs = new String[]{index+""};
+        Cursor cursor = dbObj.rawQuery(sql, selectionArgs);
         while (cursor.moveToNext()) {
             QuestionInfo info = new QuestionInfo();
             String id = cursor.getString(cursor.getColumnIndex("id"));
             String title = cursor.getString(cursor.getColumnIndex("title"));
-            String indexs = cursor.getString(cursor.getColumnIndex("index"));
+            String indexs = cursor.getString(cursor.getColumnIndex("chapter_index"));
 
             String type = cursor.getString(cursor.getColumnIndex("type"));
-//            String rig = cursor.getString(cursor.getColumnIndex("rig"));
+            String right_answer = cursor.getString(cursor.getColumnIndex("right_answer"));
 
             String knowledge_point = cursor.getString(cursor.getColumnIndex("knowledge_point"));
-            String explain = cursor.getString(cursor.getColumnIndex("explain"));
+            String explain = cursor.getString(cursor.getColumnIndex("problem_explain"));
 
             String exam_id = cursor.getString(cursor.getColumnIndex("exam_id"));
             String my_answer = cursor.getString(cursor.getColumnIndex("my_answer"));
@@ -225,7 +223,50 @@ public class DBUtlis extends SQLiteOpenHelper {
             info.setTitle(title);
             info.setExam_id(exam_id);
             info.setType(type);
-//            info.setRig(rig);
+            info.setRight_answer(right_answer);
+            info.setKnowledge_point(knowledge_point);
+            info.setExplain(explain);
+            info.setMy_answer(my_answer);
+            infos.add(info);
+        }
+
+        return infos;
+    }
+
+
+    /**
+     * 获学习章节的目录数据
+     *
+     * @return
+     */
+    public List<QuestionInfo> getTopicQuestionList(String index) {
+
+        List<QuestionInfo> infos = new ArrayList<>();
+        String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer FROM chapter,section,problem WHERE chapter.id=section.chapter_id and section.exam_id=problem.exam_id  and section.chapter_id =? ORDER BY problem.id";
+        String[] selectionArgs = new String[]{index+""};
+        Cursor cursor = dbObj.rawQuery(sql,selectionArgs);
+        // 将光标移动到下一行，从而判断该结果集是否还有下一条数据，如果有则返回true，没有则返回false
+        while (cursor.moveToNext()) {
+            QuestionInfo info = new QuestionInfo();
+            String id = cursor.getString(cursor.getColumnIndex("id"));
+            String title = cursor.getString(cursor.getColumnIndex("title"));
+            String indexs = cursor.getString(cursor.getColumnIndex("chapter_index"));
+
+            String type = cursor.getString(cursor.getColumnIndex("type"));
+            String right_answer = cursor.getString(cursor.getColumnIndex("right_answer"));
+
+            String knowledge_point = cursor.getString(cursor.getColumnIndex("knowledge_point"));
+            String explain = cursor.getString(cursor.getColumnIndex("problem_explain"));
+
+            String exam_id = cursor.getString(cursor.getColumnIndex("exam_id"));
+            String my_answer = cursor.getString(cursor.getColumnIndex("my_answer"));
+
+            info.setId(id);
+            info.setIndex(indexs);
+            info.setTitle(title);
+            info.setExam_id(exam_id);
+            info.setType(type);
+            info.setRight_answer(right_answer);
             info.setKnowledge_point(knowledge_point);
             info.setExplain(explain);
             info.setMy_answer(my_answer);

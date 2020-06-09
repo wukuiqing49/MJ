@@ -2,8 +2,6 @@ package com.wu.mj.module.home.ui.fragment
 
 import android.os.Bundle
 import android.view.View
-import androidx.databinding.ViewDataBinding
-import com.wkq.base.frame.activity.MvpBindingActivity
 import com.wkq.base.frame.fragment.MvpBindingFragment
 import com.wu.mj.R
 import com.wu.mj.databinding.FragmentHomeBinding

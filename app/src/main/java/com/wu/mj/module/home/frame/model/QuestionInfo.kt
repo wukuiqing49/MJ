@@ -16,7 +16,7 @@ class QuestionInfo {
     var index: String? = null
     var type: String? = null
     //正确答案
-    var rig: String? = null
+    var right_answer: String? = null
 
     //知识点
     var knowledge_point: String? = null
