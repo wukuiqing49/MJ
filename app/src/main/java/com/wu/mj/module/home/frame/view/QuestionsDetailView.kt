@@ -11,6 +11,7 @@ import com.wu.mj.R
 import com.wu.mj.module.home.frame.model.AnwserInfo
 import com.wu.mj.module.home.ui.adapter.QuestionAnwserAdapter
 import com.wu.mj.module.home.ui.fragment.QuestionsDetailFragment
+import com.wu.mj.utlis.DBUtlis
 
 /**
  *
@@ -38,10 +39,16 @@ class QuestionsDetailView : MvpView {
         mAdapter!!.setOnViewClickListener(object : KtDataBindingAdapter.OnAdapterViewClickListener<AnwserInfo> {
             override fun onViewClick(v: View?, program: AnwserInfo?) {
                 showMessage(program!!.anwer)
-
-
+                mAdapter?.itemList?.forEach {
+                    if (it.id != program.id) {
+                        it.setIsCheck(false)
+                    }
+                }
+                mAdapter?.notifyDataSetChanged()
+                var dbUtlis = DBUtlis(mFragment.activity)
+                if (dbUtlis.database.isOpen)
+                    dbUtlis.updateAnwser(program.problemId, program.values)
             }
-
         })
     }
 

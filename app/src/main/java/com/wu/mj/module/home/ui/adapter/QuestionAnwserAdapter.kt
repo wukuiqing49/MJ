@@ -28,7 +28,6 @@ class QuestionAnwserAdapter(context: Context, layoutId: Int) : KtDataBindingAdap
         var binding = bindingHolder.viewBinding as ItemAnwersBinding
         binding.data = getItem(position)
 
-
         if (viewClickListener != null) {
             binding.root.setOnClickListener {
                 if (getItem(position)!!.getIsCheck()== true) {

@@ -23,7 +23,6 @@ class QuestionsDetailPresenter : MvpBasePresenter<QuestionsDetailView>() {
             var anwers = db.getAnwserList(problemId)
             if (view != null) view.showData(anwers)
         }
-
     }
 
 }

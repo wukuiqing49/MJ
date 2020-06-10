@@ -1,5 +1,6 @@
 package com.wu.mj.utlis;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +10,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.wu.mj.module.home.frame.model.AnwserInfo;
 import com.wu.mj.module.home.frame.model.ChapterInfo;
 import com.wu.mj.module.home.frame.model.QuestionInfo;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -159,7 +163,7 @@ public class DBUtlis extends SQLiteOpenHelper {
             info.setTitle(title);
             infos.add(info);
         }
-
+        close();
         return infos;
     }
 
@@ -209,7 +213,7 @@ public class DBUtlis extends SQLiteOpenHelper {
             infos.add(info);
 
         }
-
+        close();
         return infos;
     }
 
@@ -236,8 +240,30 @@ public class DBUtlis extends SQLiteOpenHelper {
             infos.add(info);
 
         }
-
+        close();
         return infos;
     }
+
+    /**
+     * table为表名
+     * <p>
+     * values为ContentValues对象！该对象存储方式为Key-value，Key表示表中的字段名称
+     * <p>
+     * value表示该字段对应的值，第三个参数为条件例如：_ID = ? ,第四个参数为第三个参数的值！
+     *
+     * @param problemId 问题id
+     * @param answer    我的答案
+     */
+
+    public void updateAnwser(String problemId, String answer) {
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("my_answer", answer);
+        String[] whereArgs = new String[]{problemId};
+        dbObj.update("problem", contentValues, "id=?", whereArgs);
+        close();
+
+    }
+
 
 }

@@ -67,24 +67,31 @@ class QuestionsInfoView : MvpView {
         })
 
         mActivity.binding.rlLeft.setOnClickListener {
-            if (mPosition-- < 0) {
+            if (mPosition - 1 < 0) {
                 showMessage("已到第一页")
             } else {
-                mActivity.binding.vpContent.setCurrentItem(mPosition--)
+                mActivity.binding.vpContent.setCurrentItem(mPosition - 1)
             }
 
         }
         mActivity.binding.rlRight.setOnClickListener {
 
-            if (mPosition++ > questions.size) {
+            if (mPosition + 1 > questions.size) {
                 showMessage("已到最后一页")
             } else {
-                mActivity.binding.vpContent.setCurrentItem(mPosition++)
+                mActivity.binding.vpContent.setCurrentItem(mPosition + 1)
             }
 
         }
 
-        mActivity.binding.tvAnwser.setOnClickListener { showMessage("答案") }
+        mActivity.binding.tvAnwser.setOnClickListener { showAnswer(questions[mPosition]) }
+
+    }
+
+    //展示答案
+    private fun showAnswer(questionInfo: QuestionInfo) {
+
+
 
     }
 
