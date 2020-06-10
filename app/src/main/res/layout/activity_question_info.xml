@@ -58,7 +58,27 @@
                 android:background="@color/color_white" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cd_commit"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_above="@+id/cd_boom"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="60dp"
+                android:visibility="gone"
+                app:cardCornerRadius="100dp"
+                app:cardElevation="2dp"
+                app:cardPreventCornerOverlap="true">
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/iv_commit" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cd_boom"
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
                 android:layout_alignParentBottom="true"

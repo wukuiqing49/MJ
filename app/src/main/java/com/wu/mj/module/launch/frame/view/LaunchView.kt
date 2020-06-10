@@ -1,6 +1,7 @@
 package com.wu.mj.module.launch.frame.view
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.text.TextUtils
@@ -41,7 +42,6 @@ class LaunchView : MvpView {
                 mContext.REQUEST_CODE_LAUNCH)
         if (hasPermission) {
             var db = DBUtlis(mContext)
-            db.copyDB()
             mContext.presenter.startTimer(3000)
         }
     }
@@ -76,6 +76,18 @@ class LaunchView : MvpView {
         mContext.binding.tvAdTime.setOnClickListener { finishTimer() }
 
 //        Glide.with(mContext).load(R.drawable.iv_launch).into(mContext.binding.ivLaunch)
+
+        DataBaseUtils.insertHomeTopData(mContext as Context, "10000000001",
+                "测试1",
+                "123456",
+                ""
+        )
+
+
+        DataBaseUtils.insertHomeTopData(mContext as Context, "10000000001",
+                "测试1",
+                "123456",
+                "")
     }
 
     /**

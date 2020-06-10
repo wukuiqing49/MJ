@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+<data>
+    <variable
+        name="data"
+        type="com.wu.mj.module.home.frame.model.QuestionInfo" />
+</data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:padding="20dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_result"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:textColor="@color/color_333"
+            android:layout_centerVertical="true"
+            android:background="@{data.my_answer.equals(data.right_answer)?@drawable/shape_anwser_abc_true:@drawable/shape_anwser_abc_ok}"
+            android:gravity="center"
+            android:text="@{data.my_answer}"
+            tools:ignore="MissingConstraints" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

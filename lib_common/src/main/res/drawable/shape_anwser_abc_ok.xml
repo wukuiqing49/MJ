@@ -4,12 +4,13 @@
     android:useLevel="true">
 
 
-    <solid android:color="@color/white" />
-    <stroke android:color="@color/color_666" android:width="1dp"/>
+
+
+    <solid android:color="@color/color_m_red" />
+    <stroke android:color="@color/color_m_red" android:width="1dp"/>
     <size
         android:width="20dp"
         android:height="20dp" />
-
 
 
 </shape>

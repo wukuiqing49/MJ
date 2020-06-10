@@ -6,13 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.TextUtils;
 
 import com.wu.mj.module.home.frame.model.AnwserInfo;
 import com.wu.mj.module.home.frame.model.ChapterInfo;
 import com.wu.mj.module.home.frame.model.QuestionInfo;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -35,21 +34,18 @@ import java.util.List;
 public class DBUtlis extends SQLiteOpenHelper {
     private static String DB_PATH = "data/data/com.wu.mj/databases/";
     private static String DB_NAME = "qh";
+    String path = DB_PATH + DB_NAME;
     private SQLiteDatabase dbObj;
     public final Context context;
+    private static String Lock = "dblock";
 
     public DBUtlis(Context context) {
         super(context, DB_NAME, null, 3);
         this.context = context;
         try {
-            if (checkDB()) {
-
-            } else {
-                copyDB();
-                String myPath = DB_PATH + DB_NAME;
-                dbObj = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
-
-            }
+            if (!checkDB()) copyDB();
+            String myPath = DB_PATH + DB_NAME;
+            dbObj = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,6 +58,7 @@ public class DBUtlis extends SQLiteOpenHelper {
      * @return
      */
     private boolean checkDB() {
+
         SQLiteDatabase checkDB = null;
         try {
             String path = DB_PATH + DB_NAME;
@@ -184,7 +181,7 @@ public class DBUtlis extends SQLiteOpenHelper {
 
         List<QuestionInfo> infos = new ArrayList<>();
         String[] selectionArgs = new String[]{index + ""};
-        //String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer FROM chapter,section,problem WHERE chapter.id=section.chapter_id and section.exam_id=problem.exam_id  and section.chapter_id =? ORDER BY problem.id";
+//        String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer FROM chapter,section,problem WHERE chapter.id=section.chapter_id and section.exam_id=problem.exam_id  and section.chapter_id =? ORDER BY problem.id";
         String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer FROM problem  JOIN section  JOIN chapter ON chapter.id=section.chapter_id and section.exam_id=problem.exam_id  and section.chapter_id =? ORDER BY problem.id";
 
         Cursor cursor = dbObj.rawQuery(sql, selectionArgs);
@@ -260,9 +257,53 @@ public class DBUtlis extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("my_answer", answer);
         String[] whereArgs = new String[]{problemId};
-        dbObj.update("problem", contentValues, "id=?", whereArgs);
-        close();
 
+        dbObj.update("problem", contentValues, "id=?", whereArgs);
+//        dbObj.execSQL("update problem set my_answer=? where id=?", new Object[]{answer,problemId});
+        close();
+    }
+
+
+    public boolean isAnswer(String index) {
+
+        List<QuestionInfo> infos = new ArrayList<>();
+        String[] selectionArgs = new String[]{index + ""};
+        //String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer FROM chapter,section,problem WHERE chapter.id=section.chapter_id and section.exam_id=problem.exam_id  and section.chapter_id =? ORDER BY problem.id";
+        String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer FROM problem  JOIN section  JOIN chapter ON chapter.id=section.chapter_id and section.exam_id=problem.exam_id  and section.chapter_id =? ORDER BY problem.id";
+
+        Cursor cursor = dbObj.rawQuery(sql, selectionArgs);
+        while (cursor.moveToNext()) {
+
+            String id = cursor.getString(cursor.getColumnIndex("id"));
+            String title = cursor.getString(cursor.getColumnIndex("title"));
+            String indexs = cursor.getString(cursor.getColumnIndex("chapter_index"));
+            String type = cursor.getString(cursor.getColumnIndex("type"));
+            String right_answer = cursor.getString(cursor.getColumnIndex("right_answer"));
+            String knowledge_point = cursor.getString(cursor.getColumnIndex("knowledge_point"));
+            String explain = cursor.getString(cursor.getColumnIndex("problem_explain"));
+            String exam_id = cursor.getString(cursor.getColumnIndex("exam_id"));
+            String my_answer = cursor.getString(cursor.getColumnIndex("my_answer"));
+
+            QuestionInfo info = new QuestionInfo();
+            info.setId(id);
+            info.setIndex(indexs);
+            info.setTitle(title);
+            info.setExam_id(exam_id);
+            info.setType(type);
+            info.setRight_answer(right_answer);
+            info.setKnowledge_point(knowledge_point);
+            info.setExplain(explain);
+            if (TextUtils.isEmpty(my_answer)) {
+                close();
+                return false;
+
+            }
+            info.setMy_answer(my_answer);
+            infos.add(info);
+
+        }
+        close();
+        return true;
     }
 
 
