@@ -1,5 +1,6 @@
 package com.wu.mj.module.home.frame.view
 
+import android.text.TextUtils
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.qmuiteam.qmui.widget.QMUITopBar
@@ -31,7 +32,14 @@ class ChapterListView : MvpView {
     }
 
     fun initView() {
-        initToolBar("章节练习")
+        if (TextUtils.isEmpty(mActivity.type)) {
+            initToolBar("章节练习")
+        } else if (mActivity.type.equals("HISTORY")) {
+            initToolBar("真题精选")
+        } else if (mActivity.type.equals("SIMULATION")) {
+            initToolBar("模拟考试")
+        }
+
         mActivity.binding.rvContent.layoutManager = LinearLayoutManager(mActivity)
         mAdapter = ChapterListAdapter(mActivity, R.layout.item_charpter)
         mActivity.binding.rvContent.adapter = mAdapter
@@ -55,8 +63,8 @@ class ChapterListView : MvpView {
 
     }
 
-    fun showData(chapterList: List<ChapterInfo>) {
-        mAdapter!!.addItems(chapterList.toMutableList())
+    fun showData(chapterList: List<ChapterInfo>?) {
+        mAdapter!!.addItems(chapterList?.toMutableList())
     }
 
 }

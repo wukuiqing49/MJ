@@ -54,8 +54,7 @@ class QuestionsInfoView : MvpView {
         var myAdapter = QuestionsFragmentPagerAdapter(mActivity, mActivity.supportFragmentManager, mActivity.title, questions);
         mActivity.binding.vpContent.adapter = myAdapter
         mActivity.binding.tvCount.setText("1" + "/" + questions.size)
-
-
+        mActivity.binding.tvType.setText(questions.get(mPosition).type)
         mActivity.binding.vpContent.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
             }
@@ -72,6 +71,7 @@ class QuestionsInfoView : MvpView {
                 } else {
                     mActivity.binding.cdCommit.visibility = View.GONE
                 }
+                mActivity.binding.tvType.setText(questions.get(mPosition).type)
             }
         })
 
@@ -81,8 +81,6 @@ class QuestionsInfoView : MvpView {
             } else {
                 mActivity.binding.vpContent.setCurrentItem(mPosition - 1)
             }
-            mActivity.binding.tvType.setText(questions.get(mPosition).type)
-
         }
 
         mActivity.binding.rlRight.setOnClickListener {
@@ -91,13 +89,10 @@ class QuestionsInfoView : MvpView {
             } else {
                 mActivity.binding.vpContent.setCurrentItem(mPosition + 1)
             }
-            mActivity.binding.tvType.setText(questions.get(mPosition).type)
-        }
 
+        }
         mActivity.binding.tvAnwser.setOnClickListener { showAnswer(questions[mPosition]) }
         mActivity.binding.cdCommit.setOnClickListener { showCommit() }
-
-        mActivity.binding.vpContent.setCurrentItem(60)
     }
 
     /**
@@ -119,6 +114,5 @@ class QuestionsInfoView : MvpView {
     fun showMessage(message: String?) {
         if (TextUtils.isEmpty(message) || mActivity == null) return
         AlertUtil.showDeftToast(mActivity, message)
-
     }
 }

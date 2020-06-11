@@ -35,4 +35,16 @@ class ChapterListPresenter : MvpBasePresenter<ChapterListView>() {
         }
     }
 
+    fun initDataType(chapterListActivity: ChapterListActivity, type: String) {
+        var db = DBUtlis(chapterListActivity)
+        var chapters: List<ChapterInfo>? = null
+        chapters = db.getHistoryChapterList(type)
+        chapters.forEach {
+            it?.progress = db.getProgress(it?.index)
+        }
+        if (view != null) {
+            view.showData(chapters)
+        }
+    }
+
 }

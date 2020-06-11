@@ -170,6 +170,31 @@ public class DBUtlis extends SQLiteOpenHelper {
         return infos;
     }
 
+
+    /**
+     * 获学习章节的目录数据
+     *  @ type  HISTORY  历史题      SIMULATION真题
+     * @return
+     */
+    public List<ChapterInfo> getHistoryChapterList(String type) {
+        openDB();
+        List<ChapterInfo> infos = new ArrayList<>();
+        String sql = "SELECT * FROM exam WHERE type=?";
+        String[] selectionArgs = new String[]{type};
+        Cursor cursor = dbObj.rawQuery(sql, selectionArgs);
+        // 将光标移动到下一行，从而判断该结果集是否还有下一条数据，如果有则返回true，没有则返回false
+        while (cursor.moveToNext()) {
+            ChapterInfo info = new ChapterInfo();
+            String id = cursor.getString(cursor.getColumnIndex("id"));
+            String title = cursor.getString(cursor.getColumnIndex("title"));
+            info.setId(id);
+            info.setIndex(id);
+            info.setTitle(title);
+            infos.add(info);
+        }
+        return infos;
+    }
+
     /**
      * 获学习章节的目录数据
      * Cursor cursor = sqliteDatabase.query("user", new String[] { "id","name" }, "id=?", new String[] { "1" }, null, null, null
@@ -218,6 +243,44 @@ public class DBUtlis extends SQLiteOpenHelper {
         }
         return infos;
     }
+
+    public List<QuestionInfo> getOtherQuestionList(String index) {
+        openDB();
+        List<QuestionInfo> infos = new ArrayList<>();
+        String[] selectionArgs = new String[]{index + ""};
+//        String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer FROM chapter,section,problem WHERE chapter.id=section.chapter_id and section.exam_id=problem.exam_id  and section.chapter_id =? ORDER BY problem.id";
+//        String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer FROM problem  JOIN section  JOIN chapter ON chapter.id=section.chapter_id and section.exam_id=problem.exam_id  and section.chapter_id =? ORDER BY problem.id";
+        String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer  FROM problem WHERE exam_id=? ORDER BY problem.id";
+
+        Cursor cursor = dbObj.rawQuery(sql, selectionArgs);
+        while (cursor.moveToNext()) {
+
+            String id = cursor.getString(cursor.getColumnIndex("id"));
+            String title = cursor.getString(cursor.getColumnIndex("title"));
+            String indexs = cursor.getString(cursor.getColumnIndex("chapter_index"));
+            String type = cursor.getString(cursor.getColumnIndex("type"));
+            String right_answer = cursor.getString(cursor.getColumnIndex("right_answer"));
+            String knowledge_point = cursor.getString(cursor.getColumnIndex("knowledge_point"));
+            String explain = cursor.getString(cursor.getColumnIndex("problem_explain"));
+            String exam_id = cursor.getString(cursor.getColumnIndex("exam_id"));
+            String my_answer = cursor.getString(cursor.getColumnIndex("my_answer"));
+
+            QuestionInfo info = new QuestionInfo();
+            info.setId(id);
+            info.setIndex(indexs);
+            info.setTitle(title);
+            info.setExam_id(exam_id);
+            info.setType(type);
+            info.setRight_answer(right_answer);
+            info.setKnowledge_point(knowledge_point);
+            info.setExplain(explain);
+            info.setMy_answer(my_answer);
+            infos.add(info);
+
+        }
+        return infos;
+    }
+
 
 
     public List<AnwserInfo> getAnwserList(String problemId) {

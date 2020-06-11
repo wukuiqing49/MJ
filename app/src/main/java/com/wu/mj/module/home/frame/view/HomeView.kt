@@ -76,7 +76,7 @@ class HomeView : MvpView, View.OnClickListener {
             R.id.cd_chapter -> {
                 jumpChapter()
             }
-            R.id.cd_chapter -> {
+            R.id.cd_topic -> {
                 jumpTopic()
             }
             R.id.cd_exam -> {
@@ -97,7 +97,7 @@ class HomeView : MvpView, View.OnClickListener {
      * 模拟考试
      */
     private fun jumpTopic() {
-
+        ChapterListActivity.newInstance(mFragment!!.activity as Context,"HISTORY")
 
     }
 
@@ -105,7 +105,7 @@ class HomeView : MvpView, View.OnClickListener {
      * 每年真题
      */
     private fun jumpExam() {
-
+        ChapterListActivity.newInstance(mFragment!!.activity as Context,"SIMULATION")
 
     }
 }

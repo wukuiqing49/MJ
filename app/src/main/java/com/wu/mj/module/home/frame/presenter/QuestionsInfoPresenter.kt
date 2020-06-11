@@ -18,12 +18,15 @@ import com.wu.mj.utlis.DBUtlis
 
 class QuestionsInfoPresenter : MvpBasePresenter<QuestionsInfoView>() {
     fun getQuestions(questionsInfoActivity: QuestionsInfoActivity, index: String?) {
-
+        var questions: List<QuestionInfo>
         var db = DBUtlis(questionsInfoActivity)
-        if (db.database.isOpen) {
-            var questions = db.getQuestionList(index)
-            if(view!=null)view.showData(questions)
+        if (index!!.toInt() < 35) {
+            questions = db.getQuestionList(index)
+        } else {
+            questions = db.getOtherQuestionList(index)
         }
+
+        if (view != null) view.showData(questions)
 
     }
 
