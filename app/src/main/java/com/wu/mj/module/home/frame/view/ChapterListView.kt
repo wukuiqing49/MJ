@@ -36,9 +36,9 @@ class ChapterListView : MvpView {
         mAdapter = ChapterListAdapter(mActivity, R.layout.item_charpter)
         mActivity.binding.rvContent.adapter = mAdapter
 
-        mAdapter!!.setOnViewClickListener(object : KtDataBindingAdapter.OnAdapterViewClickListener<ChapterInfo>{
+        mAdapter!!.setOnViewClickListener(object : KtDataBindingAdapter.OnAdapterViewClickListener<ChapterInfo> {
             override fun onViewClick(v: View?, program: ChapterInfo?) {
-                QuestionsInfoActivity.newInstance(mActivity,program?.title,program?.index)
+                QuestionsInfoActivity.newInstance(mActivity, program?.title, program?.index)
             }
 
         })

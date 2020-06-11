@@ -7,16 +7,17 @@
 </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:padding="20dp"
-        android:layout_height="wrap_content">
+        android:layout_width="40dp"
+        android:id="@+id/rl_root"
+        android:layout_margin="10dp"
+        android:layout_height="40dp">
 
         <TextView
             android:id="@+id/tv_result"
             android:layout_width="20dp"
+            android:includeFontPadding="false"
             android:layout_height="20dp"
-            android:textColor="@color/color_333"
-            android:layout_centerVertical="true"
+            android:textColor="@color/color_white"
             android:background="@{data.my_answer.equals(data.right_answer)?@drawable/shape_anwser_abc_true:@drawable/shape_anwser_abc_ok}"
             android:gravity="center"
             android:text="@{data.my_answer}"

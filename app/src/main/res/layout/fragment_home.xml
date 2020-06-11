@@ -19,47 +19,126 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_below="@+id/banner_movies"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
 
-
-            <TextView
-                android:id="@+id/tv_chapter"
-                android:padding="30dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/shape_home_bg"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cd_chapter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:text="章节练习"
-                android:textColor="@color/color_333" />
-
-            <TextView
-                android:id="@+id/tv_topic"
-                android:layout_marginTop="10dp"
-                android:padding="30dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/shape_home_bg"
+                android:layout_marginRight="10dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/tv_chapter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="期货考试经典十练"
+                        android:textColor="@color/color_333"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_chapter"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="期货学习的基础知识,概括了考试的所有知识点"
+                        android:textColor="@color/color_666"
+                        android:textSize="12dp" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="15dp"
+                android:id="@+id/cd_topic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
 
-                android:text="历年真题"
-                android:textColor="@color/color_333" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
 
-            <TextView
-                android:id="@+id/tv_exam"
-                android:layout_marginTop="10dp"
+                    <TextView
+                        android:id="@+id/tv_topic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="历年真题"
+                        android:textColor="@color/color_333"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_topic"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="历年经典考试题,帮助你更好的应对考试"
+                        android:textColor="@color/color_666"
+                        android:textSize="12dp" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="15dp"
+                android:id="@+id/cd_exam"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="30dp"
-                android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/shape_home_bg"
-                android:text="模拟考试"
-                android:textColor="@color/color_333" />
+                android:layout_marginRight="10dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/tv_exam"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="仿真模拟"
+                        android:textColor="@color/color_333"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_exam"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="期货学习的基础知识,概括了考试的所有知识点"
+                        android:textColor="@color/color_m_red"
+                        android:textSize="12dp" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
 
 
         </LinearLayout>

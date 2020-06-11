@@ -29,10 +29,13 @@ class ResultAnwserAdapter(context: Context, layoutId: Int) : KtDataBindingAdapte
         var bindingHolder = holder as KtDataBindingViewHolder
         var binding = bindingHolder.viewBinding as ItemResultBinding
         binding.data = getItem(position)
+
         if (viewClickListener != null) {
-                viewClickListener?.onViewClick(binding.root, getItem(position)
-                )
+            binding.rlRoot.setOnClickListener {
+                viewClickListener?.onViewClick(binding.root, getItem(position))
             }
+
+        }
     }
 
 }

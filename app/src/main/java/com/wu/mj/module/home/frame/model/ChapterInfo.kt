@@ -14,5 +14,5 @@ class ChapterInfo {
     var id: String? = null
     var title: String? = null
     var index: String? = null
-    var progress: Int? = null
+    var progress: ProgressInfo? = null
 }

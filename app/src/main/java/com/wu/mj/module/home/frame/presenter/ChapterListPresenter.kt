@@ -1,6 +1,7 @@
 package com.wu.mj.module.home.frame.presenter
 
 import com.wkq.base.frame.mosby.MvpBasePresenter
+import com.wu.mj.module.home.frame.model.ChapterInfo
 import com.wu.mj.module.home.frame.view.ChapterListView
 import com.wu.mj.module.home.ui.activity.ChapterListActivity
 import com.wu.mj.utlis.DBUtlis
@@ -19,9 +20,18 @@ class ChapterListPresenter : MvpBasePresenter<ChapterListView>() {
     //获取章节的数据
     fun initData(chapterListActivity: ChapterListActivity) {
 
-      var db=  DBUtlis(chapterListActivity)
-        if(db.database.isOpen&&view!=null){
-            view.showData(db.chapterList)
+        var db = DBUtlis(chapterListActivity)
+
+        var chapters = db.chapterList
+
+
+//        chapters[0].progress=    db.getProgress(      chapters[0].index)
+        chapters.forEach {
+            it?.progress = db.getProgress(it?.index)
+        }
+
+        if (view != null) {
+            view.showData(chapters)
         }
     }
 

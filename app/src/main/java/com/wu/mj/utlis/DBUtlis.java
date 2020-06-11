@@ -10,6 +10,7 @@ import android.text.TextUtils;
 
 import com.wu.mj.module.home.frame.model.AnwserInfo;
 import com.wu.mj.module.home.frame.model.ChapterInfo;
+import com.wu.mj.module.home.frame.model.ProgressInfo;
 import com.wu.mj.module.home.frame.model.QuestionInfo;
 
 
@@ -116,9 +117,16 @@ public class DBUtlis extends SQLiteOpenHelper {
         return dbObj;
     }
 
-    public void openDB() throws SQLException {
-        String myPath = DB_PATH + DB_NAME;
-        dbObj = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+    public void openDB() {
+        try {
+            if (dbObj != null && !dbObj.isOpen()) {
+                String myPath = DB_PATH + DB_NAME;
+                dbObj = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+            }
+        } catch (Exception e) {
+
+        }
+
     }
 
     @Override
@@ -144,7 +152,7 @@ public class DBUtlis extends SQLiteOpenHelper {
      * @return
      */
     public List<ChapterInfo> getChapterList() {
-
+        openDB();
         List<ChapterInfo> infos = new ArrayList<>();
 
         Cursor cursor = dbObj.query("chapter", null, null, null, null, null, null);
@@ -156,11 +164,9 @@ public class DBUtlis extends SQLiteOpenHelper {
             String index = cursor.getString(cursor.getColumnIndex("chapter_index"));
             info.setId(id);
             info.setIndex(index);
-            info.setProgress(0);
             info.setTitle(title);
             infos.add(info);
         }
-        close();
         return infos;
     }
 
@@ -178,7 +184,7 @@ public class DBUtlis extends SQLiteOpenHelper {
      * @return
      */
     public List<QuestionInfo> getQuestionList(String index) {
-
+        openDB();
         List<QuestionInfo> infos = new ArrayList<>();
         String[] selectionArgs = new String[]{index + ""};
 //        String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer FROM chapter,section,problem WHERE chapter.id=section.chapter_id and section.exam_id=problem.exam_id  and section.chapter_id =? ORDER BY problem.id";
@@ -210,13 +216,12 @@ public class DBUtlis extends SQLiteOpenHelper {
             infos.add(info);
 
         }
-        close();
         return infos;
     }
 
 
     public List<AnwserInfo> getAnwserList(String problemId) {
-
+        openDB();
         List<AnwserInfo> infos = new ArrayList<>();
         String[] selectionArgs = new String[]{problemId + ""};
         String sql = "SELECT * FROM option WHERE problem_id= ?";
@@ -237,7 +242,6 @@ public class DBUtlis extends SQLiteOpenHelper {
             infos.add(info);
 
         }
-        close();
         return infos;
     }
 
@@ -253,19 +257,23 @@ public class DBUtlis extends SQLiteOpenHelper {
      */
 
     public void updateAnwser(String problemId, String answer) {
+        openDB();
 
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("my_answer", answer);
-        String[] whereArgs = new String[]{problemId};
-
-        dbObj.update("problem", contentValues, "id=?", whereArgs);
-//        dbObj.execSQL("update problem set my_answer=? where id=?", new Object[]{answer,problemId});
-        close();
+        dbObj.beginTransaction();
+        try {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("my_answer", answer);
+            String[] whereArgs = new String[]{problemId};
+            dbObj.update("problem", contentValues, "id=?", whereArgs);
+            dbObj.setTransactionSuccessful();// 设置事务执行成功
+        } finally {
+            dbObj.endTransaction();
+        }
     }
 
 
     public boolean isAnswer(String index) {
-
+        openDB();
         List<QuestionInfo> infos = new ArrayList<>();
         String[] selectionArgs = new String[]{index + ""};
         //String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer FROM chapter,section,problem WHERE chapter.id=section.chapter_id and section.exam_id=problem.exam_id  and section.chapter_id =? ORDER BY problem.id";
@@ -302,8 +310,38 @@ public class DBUtlis extends SQLiteOpenHelper {
             infos.add(info);
 
         }
-        close();
         return true;
+    }
+
+    int nowProgress;
+
+    public ProgressInfo getProgress(String chapterId) {
+        openDB();
+        List<QuestionInfo> infos = new ArrayList<>();
+        String[] selectionArgs = new String[]{chapterId + ""};
+        String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer FROM problem  JOIN section  JOIN chapter ON chapter.id=section.chapter_id and section.exam_id=problem.exam_id  and section.chapter_id =? ORDER BY problem.id";
+        Cursor cursor = dbObj.rawQuery(sql, selectionArgs);
+        while (cursor.moveToNext()) {
+            String right_answer = cursor.getString(cursor.getColumnIndex("right_answer"));
+            String my_answer = cursor.getString(cursor.getColumnIndex("my_answer"));
+            QuestionInfo info = new QuestionInfo();
+            info.setRight_answer(right_answer);
+            info.setMy_answer(my_answer);
+            infos.add(info);
+        }
+
+        ProgressInfo progressInfo = new ProgressInfo();
+        progressInfo.setTotalProgress(infos.size());
+
+        for (QuestionInfo info : infos) {
+            if (info.getRight_answer().equals(info.getMy_answer())) {
+                nowProgress += 1;
+            }
+        }
+        progressInfo.setNowProgress(nowProgress);
+        nowProgress = 0;
+        close();
+        return progressInfo;
     }
 
 

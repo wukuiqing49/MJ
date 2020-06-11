@@ -24,6 +24,10 @@ class ChapterListAdapter(context: Context, layoutId: Int) : KtDataBindingAdapter
         var bindingHolder = holder as KtDataBindingViewHolder
         var binding = bindingHolder.viewBinding as ItemCharpterBinding
         binding.data = getItem(position)
+        if (getItem(position)?.progress!=null){
+            binding.nbP.progress=getItem(position)?.progress!!.nowProgress!!.toInt()
+            binding.nbP.max=getItem(position)?.progress!!.totalProgress!!.toInt()
+        }
 
         if (viewClickListener!=null){
             binding.root.setOnClickListener { viewClickListener?.onViewClick(binding.root,getItem(position)) }

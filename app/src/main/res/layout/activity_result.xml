@@ -6,23 +6,106 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/white">
+        android:background="@color/color_white">
 
         <include
             android:id="@+id/includeToolbar"
             layout="@layout/layout_back_toolbar" />
 
+        <RelativeLayout
+            android:id="@+id/rl_top"
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/includeToolbar">
+
+            <LinearLayout
+                android:id="@+id/rl_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/shape_anwser_abc_true"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/color_white"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="正确答案"
+                    android:textColor="@color/color_333"
+                    tools:ignore="MissingConstraints" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/rl_ok"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/shape_anwser_abc_ok"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/color_white"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="错误答案"
+                    android:textColor="@color/color_333"
+                    tools:ignore="MissingConstraints" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="错误答案"
+                android:textColor="@color/color_333"
+                tools:ignore="MissingConstraints" />
+        </RelativeLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="?attr/qmui_topbar_height"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/includeToolbar"
+            app:layout_constraintTop_toBottomOf="@+id/rl_top"
             tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

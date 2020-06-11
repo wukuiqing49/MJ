@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="data"
             type="com.wu.mj.module.home.frame.model.ChapterInfo" />
@@ -59,14 +58,14 @@
                 tools:ignore="MissingConstraints" />
 
             <com.daimajia.numberprogressbar.NumberProgressBar
+                android:id="@+id/nb_p"
                 style="@style/NumberProgressBar_Default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
-                app:progress_current="00"
-                app:progress_max="100" />
+               />
 
         </LinearLayout>
 

@@ -1,13 +1,17 @@
 package com.wu.mj.module.home.frame.view
 
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.qmuiteam.qmui.widget.QMUITopBar
 import com.wkq.base.frame.mosby.delegate.MvpView
+import com.wkq.lib_base.adapter.KtDataBindingAdapter
+import com.wu.common.module.ui.dialog.AnswerDialog
 import com.wu.common.utils.StatusBarUtil
 import com.wu.mj.R
 import com.wu.mj.module.home.frame.model.QuestionInfo
 import com.wu.mj.module.home.ui.activity.ResultActivity
 import com.wu.mj.module.home.ui.adapter.ResultAnwserAdapter
+import java.text.NumberFormat
 
 /**
  *
@@ -21,7 +25,8 @@ import com.wu.mj.module.home.ui.adapter.ResultAnwserAdapter
 
 class ResultView : MvpView {
     var mActivity: ResultActivity
-    var mAdapter:ResultAnwserAdapter?=null
+    var mAdapter: ResultAnwserAdapter? = null
+
     constructor(mActivity: ResultActivity) {
         this.mActivity = mActivity
     }
@@ -30,9 +35,22 @@ class ResultView : MvpView {
     fun initView() {
         initToolBar("答题结果")
         mAdapter = ResultAnwserAdapter(mActivity, R.layout.item_result)
-        mActivity.binding.rvContent.layoutManager=GridLayoutManager(mActivity,10)
+        mActivity.binding.rvContent.layoutManager = GridLayoutManager(mActivity, 10)
         mActivity.binding.rvContent.adapter = mAdapter
+
+        mAdapter!!.setOnViewClickListener(object : KtDataBindingAdapter.OnAdapterViewClickListener<QuestionInfo> {
+            override fun onViewClick(v: View?, program: QuestionInfo?) {
+                showAnswer(program)
+            }
+        })
+
     }
+
+    //展示答案
+    private fun showAnswer(questionInfo: QuestionInfo?) {
+        AnswerDialog(mActivity).build().setTitle(questionInfo?.right_answer).setValues(questionInfo?.explain).show()
+    }
+
 
     private fun initToolBar(title: String?) {
         StatusBarUtil.setStatusBarDarkMode(mActivity)
@@ -42,13 +60,26 @@ class ResultView : MvpView {
         toolbar.setBackgroundColor(mActivity!!.resources.getColor(R.color.color_2b2b2b))
         toolbar.addLeftImageButton(R.drawable.ic_arrow_back_white_24dp, R.id.qmui_topbar_item_left_back).setOnClickListener { mActivity!!.finish() }
 
-
     }
 
     /**
      * 展示结果
      */
+    var okResult = 0.00
+
     fun showResult(results: List<QuestionInfo>) {
         mAdapter!!.addItems(results.toMutableList())
+        var okList = mutableListOf<QuestionInfo>()
+        results.forEach {
+            if (it.right_answer.equals(it.my_answer)) {
+                okResult += 1
+            }
+        }
+        var progress =okResult/results.size*100
+        var numberFormat = NumberFormat.getInstance();
+        numberFormat.minimumFractionDigits = 2
+       var progressText= numberFormat.format(progress)
+        mActivity.binding.tvResult.setText("正确率: "+ progressText+"%")
+
     }
 }

@@ -19,11 +19,9 @@ import com.wu.mj.utlis.DBUtlis
 class ResultPresenter : MvpBasePresenter<ResultView>() {
 
     fun getResultData(resultActivity: ResultActivity, index: String?) {
-
         var results = DBUtlis(resultActivity).getQuestionList(index)
 
         if (view!=null) view.showResult(results)
-
     }
 
 }

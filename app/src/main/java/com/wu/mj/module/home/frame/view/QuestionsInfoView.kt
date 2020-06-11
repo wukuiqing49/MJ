@@ -97,18 +97,19 @@ class QuestionsInfoView : MvpView {
         mActivity.binding.tvAnwser.setOnClickListener { showAnswer(questions[mPosition]) }
         mActivity.binding.cdCommit.setOnClickListener { showCommit() }
 
-
+        mActivity.binding.vpContent.setCurrentItem(60)
     }
 
     /**
      * 做完提交
      */
     private fun showCommit() {
-        if (DBUtlis(mActivity).isAnswer(mActivity.index)) {
-            ResultActivity.newInstance(mActivity, mActivity.index)
-        } else {
-            showMessage("未答完,请继续答题")
-        }
+        ResultActivity.newInstance(mActivity, mActivity.index)
+//        if (DBUtlis(mActivity).isAnswer(mActivity.index)) {
+//            ResultActivity.newInstance(mActivity, mActivity.index)
+//        } else {
+//            showMessage("未答完,请继续答题")
+//        }
 
     }
 

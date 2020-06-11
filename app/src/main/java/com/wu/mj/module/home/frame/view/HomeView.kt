@@ -26,21 +26,17 @@ import com.youth.banner.util.BannerUtils
 
 class HomeView : MvpView, View.OnClickListener {
 
-
     var mFragment: HomeFragment? = null
 
     constructor(mFragment: HomeFragment) {
         this.mFragment = mFragment
-
     }
 
     fun initView() {
         initBannerData();
-        mFragment!!.binding.tvChapter.setOnClickListener(this)
-        mFragment!!.binding.tvExam.setOnClickListener(this)
-        mFragment!!.binding.tvTopic.setOnClickListener(this)
-
-
+        mFragment!!.binding.cdChapter.setOnClickListener(this)
+        mFragment!!.binding.cdExam.setOnClickListener(this)
+        mFragment!!.binding.cdTopic.setOnClickListener(this)
     }
 
     private fun initBannerData() {
@@ -77,13 +73,13 @@ class HomeView : MvpView, View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v!!.id) {
-            R.id.tv_chapter -> {
+            R.id.cd_chapter -> {
                 jumpChapter()
             }
-            R.id.tv_topic -> {
+            R.id.cd_chapter -> {
                 jumpTopic()
             }
-            R.id.tv_exam -> {
+            R.id.cd_exam -> {
                 jumpExam()
             }
 
@@ -94,7 +90,6 @@ class HomeView : MvpView, View.OnClickListener {
      * 章节练习
      */
     private fun jumpChapter() {
-
         ChapterListActivity.newInstance(mFragment!!.activity as Context)
     }
 

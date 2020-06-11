@@ -72,6 +72,6 @@ dependencies {
     implementation 'com.download.library:Downloader:4.1.2'// (可选)
 
     api 'com.youth.banner:banner:2.0.9'
-    api   'com.daimajia.numberprogressbar:library:1.4@aar'
+    implementation   'com.daimajia.numberprogressbar:library:1.4@aar'
 
 }
