@@ -23,7 +23,7 @@ import com.wu.mj.module.login.ui.activity.RegistActivity
 
 
 class ChapterListActivity : MvpBindingActivity<ChapterListView, ChapterListPresenter, ActivityChapterListBinding>() {
-    var type=""
+    var type:String?=""
 
     companion object {
         fun newInstance(context: Context) {

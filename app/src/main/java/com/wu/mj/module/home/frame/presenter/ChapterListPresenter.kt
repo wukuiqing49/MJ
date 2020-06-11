@@ -19,28 +19,22 @@ import com.wu.mj.utlis.DBUtlis
 class ChapterListPresenter : MvpBasePresenter<ChapterListView>() {
     //获取章节的数据
     fun initData(chapterListActivity: ChapterListActivity) {
-
         var db = DBUtlis(chapterListActivity)
-
         var chapters = db.chapterList
-
-
-//        chapters[0].progress=    db.getProgress(      chapters[0].index)
         chapters.forEach {
             it?.progress = db.getProgress(it?.index)
         }
-
         if (view != null) {
             view.showData(chapters)
         }
     }
 
-    fun initDataType(chapterListActivity: ChapterListActivity, type: String) {
+    fun initDataType(chapterListActivity: ChapterListActivity, type: String?) {
         var db = DBUtlis(chapterListActivity)
         var chapters: List<ChapterInfo>? = null
         chapters = db.getHistoryChapterList(type)
         chapters.forEach {
-            it?.progress = db.getProgress(it?.index)
+            it?.progress = db.getProgressOther(it?.id)
         }
         if (view != null) {
             view.showData(chapters)

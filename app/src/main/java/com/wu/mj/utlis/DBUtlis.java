@@ -398,7 +398,7 @@ public class DBUtlis extends SQLiteOpenHelper {
         progressInfo.setTotalProgress(infos.size());
 
         for (QuestionInfo info : infos) {
-            if (info.getRight_answer().equals(info.getMy_answer())) {
+            if (!TextUtils.isEmpty(info.getMy_answer())) {
                 nowProgress += 1;
             }
         }
@@ -407,7 +407,34 @@ public class DBUtlis extends SQLiteOpenHelper {
         close();
         return progressInfo;
     }
+    public ProgressInfo getProgressOther(String chapterId) {
+        openDB();
+        List<QuestionInfo> infos = new ArrayList<>();
+        String[] selectionArgs = new String[]{chapterId + ""};
+        String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer FROM problem  where problem.exam_id =? ORDER BY problem.id";
+        Cursor cursor = dbObj.rawQuery(sql, selectionArgs);
+        while (cursor.moveToNext()) {
+            String right_answer = cursor.getString(cursor.getColumnIndex("right_answer"));
+            String my_answer = cursor.getString(cursor.getColumnIndex("my_answer"));
+            QuestionInfo info = new QuestionInfo();
+            info.setRight_answer(right_answer);
+            info.setMy_answer(my_answer);
+            infos.add(info);
+        }
 
+        ProgressInfo progressInfo = new ProgressInfo();
+        progressInfo.setTotalProgress(infos.size());
+
+        for (QuestionInfo info : infos) {
+            if (!TextUtils.isEmpty(info.getMy_answer())) {
+                nowProgress += 1;
+            }
+        }
+        progressInfo.setNowProgress(nowProgress);
+        nowProgress = 0;
+        close();
+        return progressInfo;
+    }
 
     /**
      * 资讯
