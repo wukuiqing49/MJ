@@ -32,11 +32,11 @@ class QuestionAnwserAdapter(context: Context, layoutId: Int) : KtDataBindingAdap
             binding.root.setOnClickListener {
                 if (getItem(position)!!.getIsCheck()== true) {
                     getItem(position)!!.setIsCheck(false)
-                    binding.tvCheck.setTextColor(mContext.resources.getColor(R.color.color_333))
+//                    binding.tvCheck.setTextColor(mContext.resources.getColor(R.color.color_333))
                     binding.tvCheck.setBackgroundResource(R.drawable.shape_anwser_abc_bg)
                 } else {
                     getItem(position)!!.setIsCheck(true)
-                    binding.tvCheck.setTextColor(mContext.resources.getColor(R.color.color_white))
+//                    binding.tvCheck.setTextColor(mContext.resources.getColor(R.color.color_white))
                     binding.tvCheck.setBackgroundResource(R.drawable.shape_anwser_abc_true)
                 }
 

@@ -65,7 +65,7 @@ dependencies {
     api "jp.wasabeef:glide-transformations:$rootProject.glideTransformations"
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.compiler"
     //指针
-    implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
+    api 'com.github.hackware1993:MagicIndicator:1.5.0'
 
     implementation 'com.just.agentweb:agentweb:4.1.2' // (必选)
     implementation 'com.just.agentweb:filechooser:4.1.2'// (可选)

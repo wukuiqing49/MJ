@@ -1,6 +1,7 @@
 package com.wu.mj.module.main.frame.view
 
 import android.text.TextUtils
+import android.view.View
 import androidx.core.content.ContextCompat
 import com.wkq.base.frame.mosby.delegate.MvpView
 import com.wu.common.utils.AlertUtil
@@ -33,25 +34,25 @@ class MainView : MvpView {
         var mainAdapter = HomeFragmentPagerAdapter(mActivity, mActivity.supportFragmentManager)
 
         val component: QMUITabSegment.Tab = QMUITabSegment.Tab(
-            ContextCompat.getDrawable(mActivity, R.drawable.ic_index_home_gray),
-            ContextCompat.getDrawable(mActivity, R.drawable.ic_index_home),
-            "首页", false
+                ContextCompat.getDrawable(mActivity, R.drawable.ic_index_home_gray),
+                ContextCompat.getDrawable(mActivity, R.drawable.ic_index_home),
+                "首页", false
         )
 
         val util: QMUITabSegment.Tab = QMUITabSegment.Tab(
-            ContextCompat.getDrawable(mActivity, R.drawable.ic_index_dashboard_gray),
-            ContextCompat.getDrawable(mActivity, R.drawable.ic_index_dashboard),
-            "动态", false
+                ContextCompat.getDrawable(mActivity, R.drawable.ic_index_dashboard_gray),
+                ContextCompat.getDrawable(mActivity, R.drawable.ic_index_dashboard),
+                "动态", false
         )
         val novel: QMUITabSegment.Tab = QMUITabSegment.Tab(
-            ContextCompat.getDrawable(mActivity, R.drawable.ic_index_notifications_gray),
-            ContextCompat.getDrawable(mActivity, R.drawable.ic_index_notifications),
-            "我的", false
+                ContextCompat.getDrawable(mActivity, R.drawable.ic_index_notifications_gray),
+                ContextCompat.getDrawable(mActivity, R.drawable.ic_index_notifications),
+                "我的", false
         )
 
         mActivity.binding.tabs.addTab(component)
-            .addTab(util)
-            .addTab(novel)
+                .addTab(util)
+                .addTab(novel)
 //            .addTab(lab)
 
         mActivity.binding.tabs.setDefaultNormalColor(mActivity.resources.getColor(R.color.color_n))
@@ -59,6 +60,22 @@ class MainView : MvpView {
         mActivity.binding.pager.adapter = mainAdapter
         mActivity.binding.pager.offscreenPageLimit = 4
         mActivity.binding.tabs.setupWithViewPager(mActivity.binding.pager, false)
+
+        mActivity.binding.tabs.setOnTabClickListener(object : QMUITabSegment.OnTabClickListener {
+            override fun onTabClick(index: Int) {
+                when (index) {
+                    0 -> {
+                        StatusBarUtil.setDarkMode(mActivity)
+                    }
+                    1 -> {
+                        StatusBarUtil.setDarkMode(mActivity)
+                    }
+                    2 -> {
+                        StatusBarUtil.setDarkMode(mActivity)
+                    }
+                }
+            }
+        })
 
 
     }

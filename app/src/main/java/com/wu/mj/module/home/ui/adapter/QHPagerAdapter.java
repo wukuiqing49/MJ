@@ -1,4 +1,4 @@
-package com.wu.mj.module.main.ui.adapter;
+package com.wu.mj.module.home.ui.adapter;
 
 import android.content.Context;
 
@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.wu.mj.module.home.ui.fragment.HomeFragment;
-import com.wu.mj.module.home.ui.fragment.InformationFragment;
+import com.wu.mj.module.home.ui.fragment.InformationListFragment;
 import com.wu.mj.module.mine.ui.fragment.MineFragment;
 
 
@@ -21,11 +21,11 @@ import com.wu.mj.module.mine.ui.fragment.MineFragment;
  */
 
 
-public class HomeFragmentPagerAdapter extends FragmentPagerAdapter {
+public class QHPagerAdapter extends FragmentPagerAdapter {
 
     Context context;
 
-    public HomeFragmentPagerAdapter(Context context, @NonNull FragmentManager fm) {
+    public QHPagerAdapter(Context context, @NonNull FragmentManager fm) {
         super(fm);
         this.context = context;
     }
@@ -38,15 +38,14 @@ public class HomeFragmentPagerAdapter extends FragmentPagerAdapter {
         Fragment fragment = null;
 
         switch (position) {
-
             case 0:
-                fragment = HomeFragment.Companion.newInstance();
+                fragment = InformationListFragment.Companion.newInstance("考试动态");
                 break;
             case 1:
-                fragment = InformationFragment.Companion.newInstance();
+                fragment = InformationListFragment.Companion.newInstance("考试大纲");
                 break;
             case 2:
-                fragment = MineFragment.Companion.newInstance();
+                fragment = InformationListFragment.Companion.newInstance("辅导资料");
                 break;
         }
 

@@ -10,6 +10,7 @@ import android.text.TextUtils;
 
 import com.wu.mj.module.home.frame.model.AnwserInfo;
 import com.wu.mj.module.home.frame.model.ChapterInfo;
+import com.wu.mj.module.home.frame.model.InfomationInfo;
 import com.wu.mj.module.home.frame.model.ProgressInfo;
 import com.wu.mj.module.home.frame.model.QuestionInfo;
 
@@ -173,8 +174,9 @@ public class DBUtlis extends SQLiteOpenHelper {
 
     /**
      * 获学习章节的目录数据
-     *  @ type  HISTORY  历史题      SIMULATION真题
+     *
      * @return
+     * @ type  HISTORY  历史题      SIMULATION真题
      */
     public List<ChapterInfo> getHistoryChapterList(String type) {
         openDB();
@@ -280,7 +282,6 @@ public class DBUtlis extends SQLiteOpenHelper {
         }
         return infos;
     }
-
 
 
     public List<AnwserInfo> getAnwserList(String problemId) {
@@ -407,5 +408,43 @@ public class DBUtlis extends SQLiteOpenHelper {
         return progressInfo;
     }
 
+
+    /**
+     * 资讯
+     *
+     * @param type
+     * @return
+     */
+    public List<InfomationInfo> getInfomationInfoList(String type) {
+        openDB();
+        List<InfomationInfo> infos = new ArrayList<>();
+        String sql = "SELECT * FROM zixun WHERE type=?";
+        String[] selectionArgs = new String[]{type};
+        Cursor cursor = dbObj.rawQuery(sql, selectionArgs);
+        // 将光标移动到下一行，从而判断该结果集是否还有下一条数据，如果有则返回true，没有则返回false
+        while (cursor.moveToNext()) {
+            InfomationInfo info = new InfomationInfo();
+
+            String id = cursor.getString(cursor.getColumnIndex("id"));
+            String title = cursor.getString(cursor.getColumnIndex("title"));
+
+            String time = cursor.getString(cursor.getColumnIndex("time"));
+
+            String desc = cursor.getString(cursor.getColumnIndex("desc"));
+
+            String types = cursor.getString(cursor.getColumnIndex("type"));
+            String icon = cursor.getString(cursor.getColumnIndex("icon"));
+
+            info.setId(id);
+            info.setDesc(desc);
+            info.setIcon(icon);
+            info.setTime(time);
+            info.setType(types);
+            info.setTitle(title);
+            infos.add(info);
+
+        }
+        return infos;
+    }
 
 }
