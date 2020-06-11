@@ -104,13 +104,11 @@ class QuestionsInfoView : MvpView {
      * 做完提交
      */
     private fun showCommit() {
-        ResultActivity.newInstance(mActivity, mActivity.index)
-//        if (DBUtlis(mActivity).isAnswer(mActivity.index)) {
-//            ResultActivity.newInstance(mActivity, mActivity.index)
-//        } else {
-//            showMessage("未答完,请继续答题")
-//        }
-
+        if (DBUtlis(mActivity).isAnswer(mActivity.index)) {
+            ResultActivity.newInstance(mActivity, mActivity.index)
+        } else {
+            showMessage("未答完,请继续答题")
+        }
     }
 
     //展示答案
