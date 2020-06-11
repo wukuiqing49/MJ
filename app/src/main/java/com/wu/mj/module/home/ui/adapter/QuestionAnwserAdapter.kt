@@ -28,9 +28,15 @@ class QuestionAnwserAdapter(context: Context, layoutId: Int) : KtDataBindingAdap
         var binding = bindingHolder.viewBinding as ItemAnwersBinding
         binding.data = getItem(position)
 
+        if (getItem(position)!!.getIsCheck() == true) {
+            binding.tvCheck.setTextColor(mContext.resources.getColor(R.color.color_white))
+        } else {
+            binding.tvCheck.setTextColor(mContext.resources.getColor(R.color.color_333))
+        }
+
         if (viewClickListener != null) {
             binding.root.setOnClickListener {
-                if (getItem(position)!!.getIsCheck()== true) {
+                if (getItem(position)!!.getIsCheck() == true) {
                     getItem(position)!!.setIsCheck(false)
 //                    binding.tvCheck.setTextColor(mContext.resources.getColor(R.color.color_333))
                     binding.tvCheck.setBackgroundResource(R.drawable.shape_anwser_abc_bg)
