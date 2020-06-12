@@ -25,14 +25,18 @@ class QuestionsDetailFragment : MvpBindingFragment<QuestionsDetailView, Question
     var info: QuestionInfo? = null
 
     companion object {
+
         fun newInstance(title: String, index: QuestionInfo?): QuestionsDetailFragment {
+
             var bandle: Bundle = Bundle()
             var home: QuestionsDetailFragment = QuestionsDetailFragment()
             bandle.putString("title", title)
             bandle.putSerializable("info", index)
             home.arguments = bandle
             return home
+
         }
+
     }
 
     override fun getLayoutId(): Int {
@@ -42,7 +46,7 @@ class QuestionsDetailFragment : MvpBindingFragment<QuestionsDetailView, Question
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         info = arguments!!.getSerializable("info") as QuestionInfo
-        if(mvpView!=null)mvpView.initView()
+        if (mvpView != null) mvpView.initView()
         if (presenter != null) presenter.getQuestionData(activity, info!!.id)
         binding.data = info
     }

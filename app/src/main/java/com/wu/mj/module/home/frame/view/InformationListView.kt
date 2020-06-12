@@ -2,12 +2,15 @@ package com.wu.mj.module.home.frame.view
 
 import android.content.Context
 import android.text.TextUtils
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.wkq.base.frame.mosby.delegate.MvpView
+import com.wkq.lib_base.adapter.KtDataBindingAdapter
 import com.wu.mj.R
 import com.wu.mj.module.home.frame.model.InfomationInfo
+import com.wu.mj.module.home.ui.activity.InfoWebViewActivity
 import com.wu.mj.module.home.ui.adapter.InfomationInfoListAdapter
 import com.wu.mj.module.home.ui.fragment.InformationListFragment
 
@@ -45,6 +48,13 @@ class InformationListView : MvpView {
 
             override fun onRefresh(refreshLayout: RefreshLayout) {
                 mFragment.presenter.getData(mFragment.activity as Context,mFragment.type)
+            }
+
+        })
+
+        mAdapter!!.setOnViewClickListener(object :KtDataBindingAdapter.OnAdapterViewClickListener<InfomationInfo>{
+            override fun onViewClick(v: View?, program: InfomationInfo?) {
+                InfoWebViewActivity().newInstance(mFragment.activity as Context,program!!.id,program!!.title)
             }
 
         })

@@ -101,6 +101,16 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize"
             tools:ignore="LockedOrientationActivity" />
+
+        <activity
+            android:name=".module.home.ui.activity.InfoWebViewActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            tools:ignore="LockedOrientationActivity" />
+
         <activity
             android:name=".module.home.ui.activity.ResultActivity"
             android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"

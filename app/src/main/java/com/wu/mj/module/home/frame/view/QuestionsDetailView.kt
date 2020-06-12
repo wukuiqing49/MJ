@@ -60,7 +60,6 @@ class QuestionsDetailView : MvpView {
     fun showMessage(message: String?) {
         if (TextUtils.isEmpty(message) || mFragment.activity == null) return
         AlertUtil.showDeftToast(mFragment.activity, message)
-
     }
 
 }

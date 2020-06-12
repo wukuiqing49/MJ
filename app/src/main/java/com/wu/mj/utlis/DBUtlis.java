@@ -14,13 +14,11 @@ import com.wu.mj.module.home.frame.model.InfomationInfo;
 import com.wu.mj.module.home.frame.model.ProgressInfo;
 import com.wu.mj.module.home.frame.model.QuestionInfo;
 
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -251,7 +249,6 @@ public class DBUtlis extends SQLiteOpenHelper {
         List<QuestionInfo> infos = new ArrayList<>();
         String[] selectionArgs = new String[]{index + ""};
 //        String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer FROM chapter,section,problem WHERE chapter.id=section.chapter_id and section.exam_id=problem.exam_id  and section.chapter_id =? ORDER BY problem.id";
-//        String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer FROM problem  JOIN section  JOIN chapter ON chapter.id=section.chapter_id and section.exam_id=problem.exam_id  and section.chapter_id =? ORDER BY problem.id";
         String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer  FROM problem WHERE exam_id=? ORDER BY problem.id";
 
         Cursor cursor = dbObj.rawQuery(sql, selectionArgs);
@@ -289,22 +286,18 @@ public class DBUtlis extends SQLiteOpenHelper {
         List<AnwserInfo> infos = new ArrayList<>();
         String[] selectionArgs = new String[]{problemId + ""};
         String sql = "SELECT * FROM option WHERE problem_id= ?";
-
         Cursor cursor = dbObj.rawQuery(sql, selectionArgs);
         while (cursor.moveToNext()) {
-
             String id = cursor.getString(cursor.getColumnIndex("id"));
             String value = cursor.getString(cursor.getColumnIndex("value"));
             String answer = cursor.getString(cursor.getColumnIndex("answer"));
             String problem_id = cursor.getString(cursor.getColumnIndex("problem_id"));
-
             AnwserInfo info = new AnwserInfo();
             info.setId(id);
             info.setAnwer(answer);
             info.setProblemId(problem_id);
             info.setValues(value);
             infos.add(info);
-
         }
         return infos;
     }
@@ -407,6 +400,7 @@ public class DBUtlis extends SQLiteOpenHelper {
         close();
         return progressInfo;
     }
+
     public ProgressInfo getProgressOther(String chapterId) {
         openDB();
         List<QuestionInfo> infos = new ArrayList<>();
@@ -442,6 +436,7 @@ public class DBUtlis extends SQLiteOpenHelper {
      * @param type
      * @return
      */
+
     public List<InfomationInfo> getInfomationInfoList(String type) {
         openDB();
         List<InfomationInfo> infos = new ArrayList<>();
@@ -472,6 +467,43 @@ public class DBUtlis extends SQLiteOpenHelper {
 
         }
         return infos;
+    }
+
+    /**
+     * 资讯详情
+     *
+     * @param type
+     * @return
+     */
+
+    public InfomationInfo getInfomationDetail(String type) {
+
+        openDB();
+
+        String sql = "SELECT * FROM zixun WHERE id=?";
+        String[] selectionArgs = new String[]{type};
+        Cursor cursor = dbObj.rawQuery(sql, selectionArgs);
+        // 将光标移动到下一行，从而判断该结果集是否还有下一条数据，如果有则返回true，没有则返回false
+        InfomationInfo info = null;
+
+        while (cursor.moveToNext()) {
+            info = new InfomationInfo();
+
+            String id = cursor.getString(cursor.getColumnIndex("id"));
+            String title = cursor.getString(cursor.getColumnIndex("title"));
+            String time = cursor.getString(cursor.getColumnIndex("time"));
+            String desc = cursor.getString(cursor.getColumnIndex("desc"));
+            String types = cursor.getString(cursor.getColumnIndex("type"));
+            String icon = cursor.getString(cursor.getColumnIndex("icon"));
+
+            info.setId(id);
+            info.setDesc(desc);
+            info.setIcon(icon);
+            info.setTime(time);
+            info.setType(types);
+            info.setTitle(title);
+        }
+        return info;
     }
 
 }

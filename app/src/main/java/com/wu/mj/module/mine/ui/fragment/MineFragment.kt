@@ -24,7 +24,6 @@ class MineFragment : MvpBindingFragment<MineView, MinePresenter, FragmentMineBin
         }
     }
 
-
     override fun getLayoutId(): Int {
         return R.layout.fragment_mine
     }
