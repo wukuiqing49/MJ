@@ -506,4 +506,110 @@ public class DBUtlis extends SQLiteOpenHelper {
         return info;
     }
 
+
+    public ProgressInfo getTypeProgress(String type) {
+        openDB();
+        List<QuestionInfo> infos = new ArrayList<>();
+        String[] selectionArgs = new String[]{type + ""};
+        String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer FROM problem   JOIN exam ON exam.id=problem.exam_id  and exam.type =? ORDER BY problem.id";
+        Cursor cursor = dbObj.rawQuery(sql, selectionArgs);
+        while (cursor.moveToNext()) {
+            String right_answer = cursor.getString(cursor.getColumnIndex("right_answer"));
+            String my_answer = cursor.getString(cursor.getColumnIndex("my_answer"));
+            QuestionInfo info = new QuestionInfo();
+            info.setRight_answer(right_answer);
+            info.setMy_answer(my_answer);
+            infos.add(info);
+        }
+        ProgressInfo progressInfo = new ProgressInfo();
+        progressInfo.setTotalProgress(infos.size());
+
+        for (QuestionInfo info : infos) {
+            if (info.getMy_answer().equals(info.getRight_answer())) {
+                nowProgress += 1;
+            }
+        }
+        progressInfo.setNowProgress(nowProgress);
+        nowProgress = 0;
+        close();
+        return progressInfo;
+    }
+
+
+    public ProgressInfo getLXProgress() {
+        openDB();
+        List<QuestionInfo> infos = new ArrayList<>();
+        String[] selectionArgs = new String[]{""};
+        String sql = "SELECT problem.id,problem.title,problem.type,problem.chapter_index,problem.right_answer,problem.knowledge_point,problem.problem_explain,problem.exam_id,problem.my_answer FROM problem   JOIN chapter ON chapter.id=problem.exam_id  ORDER BY problem.id";
+        Cursor cursor = dbObj.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            String right_answer = cursor.getString(cursor.getColumnIndex("right_answer"));
+            String my_answer = cursor.getString(cursor.getColumnIndex("my_answer"));
+            QuestionInfo info = new QuestionInfo();
+            info.setRight_answer(right_answer);
+            info.setMy_answer(my_answer);
+            infos.add(info);
+        }
+        ProgressInfo progressInfo = new ProgressInfo();
+        progressInfo.setTotalProgress(infos.size());
+
+        for (QuestionInfo info : infos) {
+            if (info.getMy_answer().equals(info.getRight_answer())) {
+                nowProgress += 1;
+            }
+        }
+        progressInfo.setNowProgress(nowProgress);
+        nowProgress = 0;
+        close();
+        return progressInfo;
+    }
+
+    public ProgressInfo getTotalProgress() {
+        openDB();
+        List<QuestionInfo> infos = new ArrayList<>();
+        String[] selectionArgs = new String[]{""};
+        String sql = "SELECT problem.right_answer,problem.my_answer FROM problem";
+        Cursor cursor = dbObj.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            String right_answer = cursor.getString(cursor.getColumnIndex("right_answer"));
+            String my_answer = cursor.getString(cursor.getColumnIndex("my_answer"));
+            QuestionInfo info = new QuestionInfo();
+            info.setRight_answer(right_answer);
+            info.setMy_answer(my_answer);
+            infos.add(info);
+        }
+        ProgressInfo progressInfo = new ProgressInfo();
+        progressInfo.setTotalProgress(infos.size());
+
+        for (QuestionInfo info : infos) {
+            if (info.getMy_answer().equals(info.getRight_answer())) {
+                nowProgress += 1;
+            }
+        }
+        progressInfo.setNowProgress(nowProgress);
+        nowProgress = 0;
+        close();
+        return progressInfo;
+    }
+
+    /**
+     * 清空答题记录
+     */
+    public void clearCache() {
+        openDB();
+
+        dbObj.beginTransaction();
+        try {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("my_answer", "");
+            dbObj.update("problem", contentValues, null, null);
+            dbObj.setTransactionSuccessful();// 设置事务执行成功
+        } finally {
+            dbObj.endTransaction();
+        }
+
+
+    }
+
+
 }

@@ -75,11 +75,23 @@ class ResultView : MvpView {
                 okResult += 1
             }
         }
-        var progress =okResult/results.size*100
+        var pros = okResult / results.size
+        if (pros > 0.9) {
+            mActivity.binding.ivLv.setBackgroundResource(R.mipmap.iv_perfect)
+        } else if (pros > 0.8) {
+            mActivity.binding.ivLv.setBackgroundResource(R.mipmap.iv_good)
+        } else if (pros > 0.6) {
+            mActivity.binding.ivLv.setBackgroundResource(R.mipmap.iv_success)
+        } else {
+            mActivity.binding.ivLv.setBackgroundResource(R.mipmap.iv_bad)
+        }
+
+        var progress = okResult / results.size * 100
         var numberFormat = NumberFormat.getInstance();
         numberFormat.minimumFractionDigits = 2
-       var progressText= numberFormat.format(progress)
-        mActivity.binding.tvResult.setText("正确率: "+ progressText+"%")
+        var progressText = numberFormat.format(progress)
+
+        mActivity.binding.tvResult.setText("正确率: " + progressText + "%")
 
     }
 }

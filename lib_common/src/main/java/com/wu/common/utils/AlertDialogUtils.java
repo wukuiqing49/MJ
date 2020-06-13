@@ -2,12 +2,14 @@ package com.wu.common.utils;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wkq.base.utils.DensityUtils;
+import com.wkq.base.utils.ScreenUtil;
 import com.wu.common.R;
 
 
@@ -16,6 +18,42 @@ import com.wu.common.R;
  */
 
 public class AlertDialogUtils {
+
+
+    public static Dialog showClearDialog(Context context, String leftString, String rightString, String content, String title, int leftTextColor, int rightTextColor, final DialogTwoListener l) {
+        final Dialog dialog = new Dialog(context, R.style.CustomDialogStyle);
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_dialog_ok_cancle, null);
+        ((TextView) (view.findViewById(R.id.content))).setText(content);
+        if (TextUtils.isEmpty(title)) {
+            ((TextView) (view.findViewById(R.id.title))).setVisibility(View.GONE);
+        } else {
+            ((TextView) (view.findViewById(R.id.title))).setVisibility(View.VISIBLE);
+            ((TextView) (view.findViewById(R.id.title))).setText(title);
+        }
+
+        ((TextView) (view.findViewById(R.id.btn_left))).setText(leftString);
+        ((TextView) (view.findViewById(R.id.btn_left))).setTextColor(context.getResources().getColor(leftTextColor));
+        ((TextView) (view.findViewById(R.id.btn_right))).setText(rightString);
+        ((TextView) (view.findViewById(R.id.btn_right))).setTextColor(context.getResources().getColor(rightTextColor));
+        ViewGroup.LayoutParams vl = new ViewGroup.LayoutParams(ScreenUtil.getScreenWidth(context) - DensityUtils.dp2px(context, 60), ViewGroup.LayoutParams.WRAP_CONTENT);
+        view.findViewById(R.id.btn_left).setOnClickListener(v -> {
+            if (l == null) {
+                dialog.dismiss();
+            } else {
+                l.onClickLeft(dialog);
+            }
+        });
+        view.findViewById(R.id.btn_right).setOnClickListener(v -> {
+            if (l == null) {
+                dialog.dismiss();
+            } else {
+                l.onClickRight(dialog);
+            }
+        });
+        dialog.addContentView(view, vl);
+        dialog.show();
+        return dialog;
+    }
 
     public static Dialog showTwoButtonDialog(Context context, String leftString, String rightString, String content, int leftTextColor, int rightTextColor, final DialogTwoListener l) {
         final Dialog dialog = new Dialog(context, R.style.CustomDialogStyleMediaPicker);

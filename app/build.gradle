@@ -120,6 +120,7 @@ dependencies {
     implementation "com.scwang.smartrefresh:SmartRefreshHeader:$rootProject.SmartRefreshHeader"
     implementation project(path: ':lib_common')
     implementation project(path: ':lib_database')
-    implementation   'com.daimajia.numberprogressbar:library:1.4@aar'
+    implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
+    implementation 'com.ypx.yimagepicker:androidx:3.1.4'
 
 }

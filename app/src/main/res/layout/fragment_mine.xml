@@ -18,7 +18,23 @@
                 android:layout_height="200dp"
                 android:background="@color/color_666">
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="20dp">
+
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/iv_lv"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp" />
+                </LinearLayout>
+
+
                 <RelativeLayout
+                    android:id="@+id/rl_user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
@@ -35,8 +51,8 @@
 
                         <ImageView
                             android:id="@+id/iv_icon"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
                             android:background="@drawable/iv_icon_defult"
                             android:scaleType="centerCrop" />
 
@@ -67,41 +83,79 @@
 
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1">
 
                     <TextView
+                        android:id="@+id/tv_t1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="测试" />
+                        android:layout_centerHorizontal="true"
+                        android:text="练习题"
+                        android:textColor="@color/color_333" />
 
+                    <TextView
+                        android:id="@+id/tv_lx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_t1"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:text=""
+                        android:textColor="@color/color_333" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1">
 
                     <TextView
+                        android:id="@+id/tv_t2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="测试" />
+                        android:layout_centerHorizontal="true"
+                        android:text="历年真题"
+                        android:textColor="@color/color_333" />
 
+                    <TextView
+                        android:id="@+id/tv_ls"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_t2"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:text=""
+                        android:textColor="@color/color_333" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1">
 
                     <TextView
+                        android:id="@+id/tv_t3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="测试" />
+                        android:layout_centerHorizontal="true"
+                        android:text="模拟考试"
+                        android:textColor="@color/color_333" />
 
+                    <TextView
+                        android:id="@+id/tv_mn"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_t3"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:text=""
+                        android:textColor="@color/color_333" />
                 </RelativeLayout>
 
             </LinearLayout>
@@ -177,7 +231,18 @@
                         android:textColor="@color/color_666"
                         android:textSize="15sp" />
 
+                    <TextView
+                        android:id="@+id/tv_clear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@+id/iv_clear_back"
+                        android:textColor="@color/color_999"
+                        android:textSize="15sp" />
+
                     <ImageView
+                        android:id="@+id/iv_clear_back"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
@@ -257,6 +322,7 @@
                 </RelativeLayout>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cd_login"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="60dp"
@@ -271,7 +337,7 @@
                         android:background="@color/color_666"
                         android:gravity="center"
                         android:padding="15dp"
-                        android:text="登录"
+                        android:text="注销"
                         android:textColor="@color/color_white" />
 
                 </androidx.cardview.widget.CardView>

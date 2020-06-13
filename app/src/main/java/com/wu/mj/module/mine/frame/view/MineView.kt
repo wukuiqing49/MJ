@@ -1,7 +1,22 @@
 package com.wu.mj.module.mine.frame.view
 
+import android.app.Dialog
+import android.content.Context
+import android.content.Intent
+import android.text.TextUtils
+import android.view.View
 import com.wkq.base.frame.mosby.delegate.MvpView
+import com.wkq.database.utils.DataBaseUtils
+import com.wu.common.utils.AlertDialogUtils
+import com.wu.common.utils.AlertUtil
+import com.wu.common.utils.CacheUtil
+import com.wu.mj.R
+import com.wu.mj.module.home.frame.model.ProgressInfo
+import com.wu.mj.module.login.ui.activity.LoginActivity
+import com.wu.mj.module.mine.ui.activity.UserInfoDetailActivity
 import com.wu.mj.module.mine.ui.fragment.MineFragment
+import com.wu.mj.utlis.DBUtlis
+
 
 /**
  *
@@ -13,11 +28,137 @@ import com.wu.mj.module.mine.ui.fragment.MineFragment
  */
 
 
-class MineView : MvpView {
+class MineView : MvpView, View.OnClickListener {
+
+
     var mFragment: MineFragment
 
     constructor(mFragment: MineFragment) {
         this.mFragment = mFragment
+    }
+
+    fun initView() {
+
+        mFragment.binding.tvClear.setText(CacheUtil.getTotalCacheSize(mFragment.activity))
+        mFragment.binding.rlAbout.setOnClickListener(this)
+        mFragment.binding.rlFk.setOnClickListener(this)
+        mFragment.binding.rlVersion.setOnClickListener(this)
+        mFragment.binding.rlUser.setOnClickListener(this)
+        mFragment.binding.cdLogin.setOnClickListener(this)
+
+        if (DataBaseUtils.getUser(mFragment.activity) != null) {
+            mFragment.binding.tvName.setText(DataBaseUtils.getUser(mFragment.activity).userName)
+        }
+
+
+    }
+
+    private fun clearCache() {
+        AlertDialogUtils.showClearDialog(mFragment.activity, "取消", "确定", "您确认要清除本地缓存吗?", "清除缓存", R.color.color_333, R.color.color_23d41e, object : AlertDialogUtils.DialogTwoListener {
+            override fun onClickLeft(dialog: Dialog?) {
+                dialog?.cancel()
+            }
+
+            override fun onClickRight(dialog: Dialog?) {
+
+                CacheUtil.clearAllCache(mFragment.activity)
+                dialog?.cancel()
+                showMessage("缓存清理成功")
+                mFragment.binding.tvClear.setText(CacheUtil.getTotalCacheSize(mFragment.activity))
+            }
+
+        })
+    }
+
+    fun showMessage(message: String?) {
+        if (mFragment == null || TextUtils.isEmpty(message)) return
+        AlertUtil.showDeftToast(mFragment!!.activity, message)
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.rl_clear -> {
+                clearCache()
+            }
+
+            R.id.rl_about -> {
+
+            }
+
+            R.id.rl_fk -> {
+
+            }
+
+            R.id.rl_version -> {
+
+            }
+            R.id.rl_user -> {
+                UserInfoDetailActivity.newInstance(mFragment.activity as Context)
+            }
+            R.id.cd_login -> {
+                logout()
+            }
+
+
+        }
+    }
+
+    private fun logout() {
+
+        AlertDialogUtils.showClearDialog(mFragment.activity, "取消", "确定", "注销登录将清除您的答题记录,您是否要注销登录?", "注销登录", R.color.color_333, R.color.color_23d41e, object : AlertDialogUtils.DialogTwoListener {
+            override fun onClickLeft(dialog: Dialog?) {
+                dialog?.cancel()
+            }
+
+            override fun onClickRight(dialog: Dialog?) {
+
+                dialog?.cancel()
+                logoutUSer()
+            }
+
+        })
+    }
+
+    private fun logoutUSer() {
+        DBUtlis(mFragment.activity).clearCache()
+        DataBaseUtils.setOtheLoginFalse(mFragment.activity)
+        var intent = Intent(mFragment.activity, LoginActivity().javaClass)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        mFragment.activity!!.startActivity(intent)
+    }
+
+    fun showHistory(typeProgress: ProgressInfo?) {
+        mFragment.binding.tvLs.setText(typeProgress?.nowProgress.toString() + " / " + typeProgress?.totalProgress.toString())
+    }
+
+    fun showSIMULATION(typeProgress: ProgressInfo?) {
+        mFragment.binding.tvMn.setText(typeProgress?.nowProgress.toString() + " / " + typeProgress?.totalProgress.toString())
+    }
+
+    fun showLX(lxProgress: ProgressInfo?) {
+        mFragment.binding.tvLx.setText(lxProgress?.nowProgress.toString() + " / " + lxProgress?.totalProgress.toString())
+
+    }
+
+    fun showLv(totalProgress: ProgressInfo) {
+        if (totalProgress.nowProgress!!.toInt() > 100) {
+            mFragment.binding.ivLv.visibility = View.VISIBLE
+        } else {
+            mFragment.binding.ivLv.visibility = View.GONE
+            return
+        }
+
+        var progress = totalProgress!!.nowProgress!!.toFloat() / totalProgress!!.totalProgress!!
+        if (progress > 0.9) {
+            mFragment.binding.ivLv.setBackgroundResource(R.mipmap.iv_perfect)
+        } else if (progress > 0.8) {
+            mFragment.binding.ivLv.setBackgroundResource(R.mipmap.iv_good)
+        } else if (progress > 0.6) {
+            mFragment.binding.ivLv.setBackgroundResource(R.mipmap.iv_success)
+        } else {
+            mFragment.binding.ivLv.setBackgroundResource(R.mipmap.iv_bad)
+        }
+
     }
 
 }

@@ -81,6 +81,14 @@
                     tools:ignore="MissingConstraints" />
             </LinearLayout>
 
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:id="@+id/iv_lv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
             <TextView
                 android:id="@+id/tv_result"
                 android:layout_width="wrap_content"

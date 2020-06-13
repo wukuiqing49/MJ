@@ -23,7 +23,7 @@ import com.wu.mj.module.login.ui.activity.RegistActivity
 
 
 class ChapterListActivity : MvpBindingActivity<ChapterListView, ChapterListPresenter, ActivityChapterListBinding>() {
-    var type:String?=""
+    var type: String? = ""
 
     companion object {
         fun newInstance(context: Context) {
@@ -46,11 +46,14 @@ class ChapterListActivity : MvpBindingActivity<ChapterListView, ChapterListPrese
         super.onCreate(savedInstanceState)
         type = intent.getStringExtra("type")
         if (mvpView != null) mvpView.initView()
-        if(TextUtils.isEmpty(type)){
-            if (presenter != null) presenter.initData(this)
-        }else{
-            if (presenter != null) presenter.initDataType(this,type)
-        }
+    }
 
+    override fun onResume() {
+        super.onResume()
+        if (TextUtils.isEmpty(type)) {
+            if (presenter != null) presenter.initData(this)
+        } else {
+            if (presenter != null) presenter.initDataType(this, type)
+        }
     }
 }

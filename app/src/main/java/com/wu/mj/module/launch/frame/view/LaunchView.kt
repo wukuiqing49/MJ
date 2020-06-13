@@ -41,7 +41,6 @@ class LaunchView : MvpView {
                 , mContext.permissionsREAD,
                 mContext.REQUEST_CODE_LAUNCH)
         if (hasPermission) {
-            var db = DBUtlis(mContext)
             mContext.presenter.startTimer(3000)
         }
     }
@@ -74,18 +73,14 @@ class LaunchView : MvpView {
         StatusBarUtil.setLightMode(mContext)
         processFullScreen()
         mContext.binding.tvAdTime.setOnClickListener { finishTimer() }
-
-//        Glide.with(mContext).load(R.drawable.iv_launch).into(mContext.binding.ivLaunch)
-
-        DataBaseUtils.insertHomeTopData(mContext as Context, "10000000001",
+        DataBaseUtils.initUser(mContext as Context, "10000000001",
                 "测试1",
                 "123456",
                 ""
         )
 
-
-        DataBaseUtils.insertHomeTopData(mContext as Context, "10000000001",
-                "测试1",
+        DataBaseUtils.initUser(mContext as Context, "10000000003",
+                "测试2",
                 "123456",
                 "")
     }
@@ -108,17 +103,14 @@ class LaunchView : MvpView {
     }
 
     fun finishTimer() {
-
         var intent: Intent = Intent();
         if (DataBaseUtils.isLogin(mContext)) {
             intent.setClass(mContext, MainActivity().javaClass)
-//            intent.setClass(mContext, LoginActivity().javaClass)
             mContext.startActivity(intent)
         } else {
             intent.setClass(mContext, LoginActivity().javaClass)
             mContext.startActivity(intent)
         }
-
         mContext.finish()
 
     }
