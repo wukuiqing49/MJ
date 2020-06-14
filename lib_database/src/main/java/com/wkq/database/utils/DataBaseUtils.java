@@ -48,12 +48,12 @@ public class DataBaseUtils {
             dao.updateInTx(infos);
         }
 
-        Log.e("","");
+        Log.e("", "");
     }
 
     public static void initUser(Context context, String phoneNum, String nickName, String pwd, String path) {
         UserInfoDao dao = DaoHelper.getInstance(context).getUserInfoDao();
-        if (dao.loadAll()==null||dao.loadAll().size()>0)return;
+        if (dao.loadAll() == null || dao.loadAll().size() > 0) return;
         UserInfo info = new UserInfo();
         info.setUserIcon(path);
         info.setUserName(nickName);
@@ -135,6 +135,40 @@ public class DataBaseUtils {
         if (info != null) info.setIsLogout(isLogin);
         dao.update(info);
 
+    }
+
+    public static void updateUserName(Context context, String nickName) {
+        UserInfoDao dao = DaoHelper.getInstance(context).getUserInfoDao();
+        UserInfo userInfo = null;
+        List<UserInfo> infos = dao.loadAll();
+        for (UserInfo info : infos) {
+            if (info.getIsLogout()) {
+                userInfo = info;
+                break;
+            }
+        }
+        if (userInfo != null) {
+            UserInfoDao dao2 = DaoHelper.getInstance(context).getUserInfoDao();
+            userInfo.setUserName(nickName);
+            dao2.updateInTx(userInfo);
+        }
+    }
+
+    public static void updateUserIcon(Context context, String icon) {
+        UserInfoDao dao = DaoHelper.getInstance(context).getUserInfoDao();
+        UserInfo userInfo = null;
+        List<UserInfo> infos = dao.loadAll();
+        for (UserInfo info : infos) {
+            if (info.getIsLogout()) {
+                userInfo = info;
+                break;
+            }
+        }
+        if (userInfo != null) {
+            UserInfoDao dao2 = DaoHelper.getInstance(context).getUserInfoDao();
+            userInfo.setUserIcon(icon);
+            dao2.updateInTx(userInfo);
+        }
     }
 
 

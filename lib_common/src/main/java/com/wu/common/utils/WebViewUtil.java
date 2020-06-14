@@ -77,7 +77,7 @@ public class WebViewUtil {
     public static void setPtoHtmlData(Activity activity, String pData,int fontSize,WebView webView) {
         if (null != webView) {
             context = activity;
-            String html = "<html><head><meta charset=\"UTF-8\"><style type=\"text/css\">html,body{padding:0px;margin:0px;font-size:" + fontSize + "px} img{background-size:contain|cover;width:100%;height: auto;} p{margin:0px;font-size:" + fontSize + "px}</style></head><body>" + pData + "</body></html>";
+            String html = "<html><head><meta charset=\"UTF-8\"><style type=\"text/css\">html,body{padding:5px;margin:5px;font-size:" + fontSize + "px} img{background-size:contain|cover;width:100%;height: auto;} p{margin:0px;font-size:" + fontSize + "px}</style></head><body>" + pData + "</body></html>";
             // 设置支持javascript脚本
             webView.getSettings().setJavaScriptEnabled(true);
             webView.addJavascriptInterface(new JsObject(), "injectedObject");

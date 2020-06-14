@@ -6,6 +6,7 @@ import com.qmuiteam.qmui.widget.QMUITopBar
 import com.wkq.base.frame.mosby.delegate.MvpView
 import com.wkq.lib_base.adapter.KtDataBindingAdapter
 import com.wu.common.module.ui.dialog.AnswerDialog
+import com.wu.common.module.ui.dialog.AnswerResultDialog
 import com.wu.common.utils.StatusBarUtil
 import com.wu.mj.R
 import com.wu.mj.module.home.frame.model.QuestionInfo
@@ -48,7 +49,7 @@ class ResultView : MvpView {
 
     //展示答案
     private fun showAnswer(questionInfo: QuestionInfo?) {
-        AnswerDialog(mActivity).build().setTitle(questionInfo?.right_answer).setValues(questionInfo?.explain).show()
+        AnswerResultDialog(mActivity).build().setTitle(questionInfo?.right_answer).setValues(questionInfo?.explain).setQuestion(questionInfo?.title).show()
     }
 
 

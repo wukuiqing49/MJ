@@ -63,7 +63,7 @@ import java.util.ArrayList;
         @Override
         public PickerUiConfig getUiConfig(Context context) {
             PickerUiConfig uiConfig = new PickerUiConfig();
-            uiConfig.setThemeColor(Color.RED);
+            uiConfig.setThemeColor(context.getResources().getColor(R.color.color_23d41e));
             uiConfig.setShowStatusBar(false);
             uiConfig.setStatusBarColor(Color.BLACK);
             uiConfig.setPickerBackgroundColor(Color.BLACK);

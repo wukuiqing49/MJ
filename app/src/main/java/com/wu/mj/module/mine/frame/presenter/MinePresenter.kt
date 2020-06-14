@@ -3,6 +3,7 @@ package com.wu.mj.module.mine.frame.presenter
 import android.content.Context
 import android.util.Log
 import com.wkq.base.frame.mosby.MvpBasePresenter
+import com.wu.common.utils.TimerWaitUtil
 import com.wu.mj.module.mine.frame.view.MineView
 import com.wu.mj.utlis.DBUtlis
 
@@ -37,4 +38,29 @@ class MinePresenter : MvpBasePresenter<MineView>() {
         var db= DBUtlis(context)
         if(view!=null) view.showLv(db.getTotalProgress())
     }
+
+    var timerUtil: TimerWaitUtil? = null
+
+    fun startTimer() {
+        timerUtil = TimerWaitUtil()
+
+        timerUtil!!.totalTime = 2000
+        timerUtil!!.intervalTime = 100
+        timerUtil!!.setTimerLiener(object : TimerWaitUtil.TimeListener {
+            override fun onFinish() {
+                if (view != null) view.finishTimer()
+                if (timerUtil != null) timerUtil!!.cancel()
+
+            }
+
+            override fun onInterval(time: Long) {
+
+            }
+
+        })
+        timerUtil!!.start()
+
+    }
+
+
 }

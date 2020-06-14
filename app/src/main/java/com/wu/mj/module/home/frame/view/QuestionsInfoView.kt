@@ -89,7 +89,6 @@ class QuestionsInfoView : MvpView {
             } else {
                 mActivity.binding.vpContent.setCurrentItem(mPosition + 1)
             }
-
         }
         mActivity.binding.tvAnwser.setOnClickListener { showAnswer(questions[mPosition]) }
         mActivity.binding.cdCommit.setOnClickListener { showCommit() }

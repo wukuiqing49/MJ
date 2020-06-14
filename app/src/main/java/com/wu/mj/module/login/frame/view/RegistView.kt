@@ -14,6 +14,7 @@ import com.qmuiteam.qmui.widget.QMUITopBar
 import com.wkq.base.frame.mosby.delegate.MvpView
 import com.wkq.database.utils.DataBaseUtils
 import com.wu.common.module.ui.WebViewActivity
+import com.wu.common.module.ui.WebViewPActivity
 import com.wu.common.utils.AlertUtil
 import com.wu.common.utils.StatusBarUtil
 import com.wu.mj.R
@@ -52,17 +53,15 @@ class RegistView : MvpView {
         val ssb = SpannableStringBuilder(textContent)
         ssb.setSpan(object : ClickableSpan() {
             override fun onClick(widget: View) {
-                WebViewActivity.newInstance(mActivity as Context, "https://www.baidu.com", "百度")
+                WebViewPActivity.newInstance(mActivity as Context, "yh", "用户协议")
             }
-
             override fun updateDrawState(ds: TextPaint) {
                 ds.isUnderlineText = false
             }
         }, 11, 15, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         ssb.setSpan(object : ClickableSpan() {
             override fun onClick(widget: View) {
-//                showMessage("隐私政策")
-                WebViewActivity.newInstance(mActivity as Context, "https://www.baidu.com", "百度")
+                WebViewPActivity.newInstance(mActivity as Context, "ys", "隐私协议")
 
             }
 

@@ -9,6 +9,8 @@ import com.wu.mj.databinding.FragmentMineBinding
 
 import com.wu.mj.module.mine.frame.presenter.MinePresenter
 import com.wu.mj.module.mine.frame.view.MineView
+import com.wu.mj.utlis.UserObservable
+import java.util.*
 
 /**
  *
@@ -20,7 +22,8 @@ import com.wu.mj.module.mine.frame.view.MineView
  */
 
 
-class MineFragment : MvpBindingFragment<MineView, MinePresenter, FragmentMineBinding>() {
+class MineFragment : MvpBindingFragment<MineView, MinePresenter, FragmentMineBinding>(),Observer {
+
     companion object {
         fun newInstance(): MineFragment {
             return MineFragment()
@@ -34,6 +37,7 @@ class MineFragment : MvpBindingFragment<MineView, MinePresenter, FragmentMineBin
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if(mvpView!=null)mvpView.initView()
+        UserObservable.addObserver(this)
 
     }
 
@@ -43,5 +47,22 @@ class MineFragment : MvpBindingFragment<MineView, MinePresenter, FragmentMineBin
         if(presenter!=null)presenter.getHistoryData(activity as Context)
         if(presenter!=null)presenter.getSIMULATIONData(activity as Context)
         if(presenter!=null)presenter.getTotal(activity as Context)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        UserObservable.deleteObserver(this)
+    }
+
+    override fun update(o: Observable?, arg: Any?) {
+        if (o is UserObservable){
+            var type=arg as Int
+            if (type==1){
+                mvpView.updateName()
+            }
+            if (type==2){
+                mvpView.updateIcon()
+            }
+        }
     }
 }

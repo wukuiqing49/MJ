@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.text.TextUtils
 import android.view.View
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.wkq.base.frame.mosby.delegate.MvpView
 import com.wkq.database.utils.DataBaseUtils
 import com.wu.common.utils.AlertDialogUtils
@@ -13,6 +15,8 @@ import com.wu.common.utils.CacheUtil
 import com.wu.mj.R
 import com.wu.mj.module.home.frame.model.ProgressInfo
 import com.wu.mj.module.login.ui.activity.LoginActivity
+import com.wu.mj.module.mine.ui.activity.AboutActivity
+import com.wu.mj.module.mine.ui.activity.FeedbackActivity
 import com.wu.mj.module.mine.ui.activity.UserInfoDetailActivity
 import com.wu.mj.module.mine.ui.fragment.MineFragment
 import com.wu.mj.utlis.DBUtlis
@@ -30,6 +34,7 @@ import com.wu.mj.utlis.DBUtlis
 
 class MineView : MvpView, View.OnClickListener {
 
+    var request = RequestOptions.centerCropTransform().error(R.drawable.iv_icon_defult).placeholder(R.drawable.iv_icon_defult)
 
     var mFragment: MineFragment
 
@@ -41,7 +46,7 @@ class MineView : MvpView, View.OnClickListener {
 
         mFragment.binding.tvClear.setText(CacheUtil.getTotalCacheSize(mFragment.activity))
         mFragment.binding.rlAbout.setOnClickListener(this)
-        mFragment.binding.rlFk.setOnClickListener(this)
+        mFragment.binding.rlFeeedBack.setOnClickListener(this)
         mFragment.binding.rlVersion.setOnClickListener(this)
         mFragment.binding.rlUser.setOnClickListener(this)
         mFragment.binding.cdLogin.setOnClickListener(this)
@@ -49,6 +54,7 @@ class MineView : MvpView, View.OnClickListener {
         if (DataBaseUtils.getUser(mFragment.activity) != null) {
             mFragment.binding.tvName.setText(DataBaseUtils.getUser(mFragment.activity).userName)
         }
+        Glide.with(mFragment).load(DataBaseUtils.getUser(mFragment.activity).userIcon).apply(request).into(mFragment.binding.ivIcon)
 
 
     }
@@ -82,15 +88,15 @@ class MineView : MvpView, View.OnClickListener {
             }
 
             R.id.rl_about -> {
-
+                AboutActivity.newInstance(mFragment.activity as Context)
             }
 
-            R.id.rl_fk -> {
-
+            R.id.rl_feeed_back -> {
+                FeedbackActivity.newInstance(mFragment.activity as Context)
             }
 
             R.id.rl_version -> {
-
+                mFragment.presenter.startTimer()
             }
             R.id.rl_user -> {
                 UserInfoDetailActivity.newInstance(mFragment.activity as Context)
@@ -158,6 +164,25 @@ class MineView : MvpView, View.OnClickListener {
         } else {
             mFragment.binding.ivLv.setBackgroundResource(R.mipmap.iv_bad)
         }
+
+    }
+
+    fun updateIcon() {
+        Glide.with(mFragment).load(DataBaseUtils.getUser(mFragment.activity).userIcon).apply(request).into(mFragment.binding.ivIcon)
+
+
+    }
+
+    fun updateName() {
+        if (DataBaseUtils.getUser(mFragment.activity) != null) {
+            mFragment.binding.tvName.setText(DataBaseUtils.getUser(mFragment.activity).userName)
+        }
+
+    }
+
+    fun finishTimer() {
+
+        showMessage("暂无新版本")
 
     }
 
