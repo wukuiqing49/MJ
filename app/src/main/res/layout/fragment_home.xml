@@ -11,15 +11,21 @@
             android:id="@+id/banner_movies"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            banner:indicator_normal_color="@color/color_999"
+            banner:indicator_selected_color="@color/color_666" />
 
-            banner:indicator_normal_color="@android:color/white"
-            banner:indicator_selected_color="@color/color_2b2b2b" />
-
+        <com.youth.banner.indicator.RoundLinesIndicator
+            android:id="@+id/indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_below="@+id/banner_movies"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/banner_movies"
+            android:layout_below="@+id/indicator"
             android:layout_marginTop="20dp"
             android:orientation="vertical">
 
@@ -62,11 +68,11 @@
 
 
             <androidx.cardview.widget.CardView
-                android:layout_marginTop="15dp"
                 android:id="@+id/cd_topic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="5dp">
@@ -101,11 +107,11 @@
 
 
             <androidx.cardview.widget.CardView
-                android:layout_marginTop="15dp"
                 android:id="@+id/cd_exam"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="5dp">
@@ -138,8 +144,43 @@
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_exam"
+                    android:text="学习天数 : "
+                    android:textColor="@color/color_333"
+                    android:textSize="25dp" />
 
+                <TextView
+                    android:id="@+id/tv_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_exam"
+                    android:text=""
+                    android:layout_marginLeft="3dp"
+                    android:textColor="@color/color_m_red"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:layout_marginLeft="3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_exam"
+
+                    android:text="天"
+                    android:textColor="@color/color_333"
+                    android:textSize="25dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

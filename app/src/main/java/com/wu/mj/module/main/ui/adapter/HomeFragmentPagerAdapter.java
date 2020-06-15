@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.wu.mj.module.home.ui.fragment.ExamAnnouncementFragment;
 import com.wu.mj.module.home.ui.fragment.HomeFragment;
 import com.wu.mj.module.home.ui.fragment.InformationFragment;
 import com.wu.mj.module.mine.ui.fragment.MineFragment;
@@ -46,6 +47,9 @@ public class HomeFragmentPagerAdapter extends FragmentPagerAdapter {
                 fragment = InformationFragment.Companion.newInstance();
                 break;
             case 2:
+                fragment = ExamAnnouncementFragment.Companion.newInstance();
+                break;
+            case 3:
                 fragment = MineFragment.Companion.newInstance();
                 break;
         }
@@ -55,6 +59,6 @@ public class HomeFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 }

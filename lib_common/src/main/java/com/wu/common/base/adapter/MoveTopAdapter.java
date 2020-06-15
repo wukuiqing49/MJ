@@ -23,26 +23,27 @@ import java.util.List;
  * <p>
  * 简介:
  */
-public class MoveTopAdapter extends BannerAdapter<HomeTopBean, ImageHolder> {
+public class MoveTopAdapter extends BannerAdapter<HomeTopBean, ImageTitleHolder> {
 
     public MoveTopAdapter(List<HomeTopBean> mDatas) {
         super(mDatas);
     }
 
     @Override
-    public ImageHolder onCreateHolder(ViewGroup parent, int viewType) {
-        ImageView imageView = (ImageView) BannerUtils.getView(parent, R.layout.banner_image);
-        return new ImageHolder(imageView);
+    public ImageTitleHolder onCreateHolder(ViewGroup parent, int viewType) {
+        return new ImageTitleHolder(BannerUtils.getView(parent,R.layout.banner_image));
     }
 
     @Override
-    public void onBindView(ImageHolder holder, HomeTopBean data, int position, int size) {
+    public void onBindView(ImageTitleHolder holder, HomeTopBean data, int position, int size) {
         //通过图片加载器实现圆角，你也可以自己使用圆角的imageview，实现圆角的方法很多，自己尝试哈
         RequestOptions requestOptions = RequestOptions.centerCropTransform().centerCrop().diskCacheStrategy(DiskCacheStrategy.RESOURCE).dontAnimate();
         Glide.with(holder.itemView)
                 .load(data.getPath())
                 .apply(requestOptions)
                 .into(holder.imageView);
+
+        holder.title.setText(data.getTitle());
     }
 
 }

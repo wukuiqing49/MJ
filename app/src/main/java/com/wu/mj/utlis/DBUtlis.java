@@ -13,6 +13,7 @@ import com.wu.mj.module.home.frame.model.ChapterInfo;
 import com.wu.mj.module.home.frame.model.InfomationInfo;
 import com.wu.mj.module.home.frame.model.ProgressInfo;
 import com.wu.mj.module.home.frame.model.QuestionInfo;
+import com.wu.mj.module.home.frame.model.AnnouncementInfo;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -564,6 +565,32 @@ public class DBUtlis extends SQLiteOpenHelper {
         return progressInfo;
     }
 
+    public List<AnnouncementInfo> getAnnouncement() {
+        openDB();
+
+        List<AnnouncementInfo> infos = new ArrayList<>();
+
+        Cursor cursor = dbObj.query("announcement", null, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+            AnnouncementInfo info = new AnnouncementInfo();
+            String id = cursor.getString(cursor.getColumnIndex("id"));
+            String title = cursor.getString(cursor.getColumnIndex("title"));
+            String a_time = cursor.getString(cursor.getColumnIndex("a_time"));
+            String href = cursor.getString(cursor.getColumnIndex("href"));
+            String post_time = cursor.getString(cursor.getColumnIndex("post_time"));
+
+            info.setId(id);
+            info.setTitle(title);
+            info.setA_time(a_time);
+            info.setPost_time(post_time);
+            info.setHref(href);
+
+            infos.add(info);
+        }
+
+        return infos;
+    }
+
     public ProgressInfo getTotalProgress() {
         openDB();
         List<QuestionInfo> infos = new ArrayList<>();
@@ -597,7 +624,6 @@ public class DBUtlis extends SQLiteOpenHelper {
      */
     public void clearCache() {
         openDB();
-
         dbObj.beginTransaction();
         try {
             ContentValues contentValues = new ContentValues();
@@ -607,8 +633,6 @@ public class DBUtlis extends SQLiteOpenHelper {
         } finally {
             dbObj.endTransaction();
         }
-
-
     }
 
 

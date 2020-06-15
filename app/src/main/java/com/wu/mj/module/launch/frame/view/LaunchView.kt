@@ -10,10 +10,7 @@ import android.view.WindowManager
 import androidx.core.app.ActivityCompat
 import com.wkq.base.frame.mosby.delegate.MvpView
 import com.wkq.database.utils.DataBaseUtils
-import com.wu.common.utils.AlertDialogUtils
-import com.wu.common.utils.AlertUtil
-import com.wu.common.utils.PermissionChecker
-import com.wu.common.utils.StatusBarUtil
+import com.wu.common.utils.*
 import com.wu.mj.R
 import com.wu.mj.module.launch.ui.activity.LaunchActivity
 import com.wu.mj.module.login.ui.activity.LoginActivity
@@ -103,6 +100,10 @@ class LaunchView : MvpView {
     }
 
     fun finishTimer() {
+        if (SharedPreferencesHelper.getInstance(mContext).getLong("startTime") < 1000) {
+            SharedPreferencesHelper.getInstance(mContext).setValue("startTime", System.currentTimeMillis())
+        }
+
         var intent: Intent = Intent();
         if (DataBaseUtils.isLogin(mContext)) {
             intent.setClass(mContext, MainActivity().javaClass)

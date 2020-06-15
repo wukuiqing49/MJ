@@ -44,16 +44,23 @@ class MainView : MvpView {
                 ContextCompat.getDrawable(mActivity, R.drawable.ic_index_dashboard),
                 "动态", false
         )
+
         val novel: QMUITabSegment.Tab = QMUITabSegment.Tab(
                 ContextCompat.getDrawable(mActivity, R.drawable.ic_index_notifications_gray),
                 ContextCompat.getDrawable(mActivity, R.drawable.ic_index_notifications),
+                "资讯", false
+        )
+
+        val lab: QMUITabSegment.Tab = QMUITabSegment.Tab(
+                ContextCompat.getDrawable(mActivity, R.drawable.ic_fly_refresh_developer_gray),
+                ContextCompat.getDrawable(mActivity, R.drawable.ic_fly_refresh_developer),
                 "我的", false
         )
 
         mActivity.binding.tabs.addTab(component)
                 .addTab(util)
                 .addTab(novel)
-//            .addTab(lab)
+            .addTab(lab)
 
         mActivity.binding.tabs.setDefaultNormalColor(mActivity.resources.getColor(R.color.color_n))
         mActivity.binding.tabs.setDefaultSelectedColor(mActivity.resources.getColor(R.color.color_s))
