@@ -3,7 +3,6 @@ package com.wu.mj.module.home.ui.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.just.agentweb.AgentWeb
 import com.wkq.base.frame.activity.MvpBindingActivity
 import com.wu.mj.R
 import com.wu.mj.databinding.FragmentInfoViewBinding
@@ -24,8 +23,6 @@ class InfoWebViewActivity : MvpBindingActivity<InfoWebView, InfoWebPresenter, Fr
 
     var title: String? = null
     var index: String? = null
-
-    var mAgentWeb: AgentWeb? = null
     fun newInstance(context: Context, index: String?, title: String?) {
         var intnet = Intent(context, InfoWebViewActivity().javaClass)
         intnet.putExtra("index", index)
@@ -42,8 +39,8 @@ class InfoWebViewActivity : MvpBindingActivity<InfoWebView, InfoWebPresenter, Fr
         title = intent.getStringExtra("title")
         index = intent.getStringExtra("index")
         if (view != null) view.initView()
-        if(presenter!=null){
-            presenter.getData(this,index)
+        if (presenter != null) {
+            presenter.getData(this, index)
         }
 
     }

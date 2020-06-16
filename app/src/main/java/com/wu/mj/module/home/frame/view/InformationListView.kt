@@ -1,7 +1,6 @@
 package com.wu.mj.module.home.frame.view
 
 import android.content.Context
-import android.text.TextUtils
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.scwang.smartrefresh.layout.api.RefreshLayout
