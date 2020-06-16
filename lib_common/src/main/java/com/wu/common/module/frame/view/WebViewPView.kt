@@ -30,13 +30,8 @@ class WebViewPView : MvpView {
 
         initToolBar(mActivity.title)
         if (mActivity.type.equals("ys")){
-//            var html=Html.fromHtml(mActivity.resources.getString(R.string.privacy_policy)).toString()
-//            mActivity.binding.webRoot.loadData(html, "text/html", "utf-8")
-
             WebViewUtil.setPtoHtmlData(mActivity,mActivity.resources.getString(R.string.privacy_policy),15,mActivity.binding.webRoot);
         }else{
-//            var html=Html.fromHtml(mActivity.resources.getString(R.string.user_agreement)).toString()
-//            mActivity.binding.webRoot.loadData(html, "text/html", "utf-8")
             WebViewUtil.setPtoHtmlData(mActivity,mActivity.resources.getString(R.string.user_agreement),15,mActivity.binding.webRoot);
         }
     }

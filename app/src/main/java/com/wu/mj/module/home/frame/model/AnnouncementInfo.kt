@@ -21,5 +21,8 @@ class AnnouncementInfo {
     var href: String? = null
 
     var post_time: String? = null
+    var a_type: String? = null
+
+    var a_desc: String? = null
 
 }

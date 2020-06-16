@@ -569,8 +569,9 @@ public class DBUtlis extends SQLiteOpenHelper {
         openDB();
 
         List<AnnouncementInfo> infos = new ArrayList<>();
-
-        Cursor cursor = dbObj.query("announcement", null, null, null, null, null, null);
+        String[] selectionArgs = new String[]{"new"};
+        String sql = "SELECT * FROM announcement where a_type= ?";
+        Cursor cursor = dbObj.rawQuery(sql, selectionArgs);
         while (cursor.moveToNext()) {
             AnnouncementInfo info = new AnnouncementInfo();
             String id = cursor.getString(cursor.getColumnIndex("id"));
@@ -633,6 +634,58 @@ public class DBUtlis extends SQLiteOpenHelper {
         } finally {
             dbObj.endTransaction();
         }
+    }
+
+    /**
+     * 获取指定类型的数据
+     *
+     * @param type
+     * @return
+     */
+    public List<AnnouncementInfo> getNews(String type) {
+        openDB();
+
+        List<AnnouncementInfo> infos = new ArrayList<>();
+        String[] selectionArgs = new String[]{type};
+        String sql = "SELECT * FROM announcement where a_type= ?";
+        Cursor cursor = dbObj.rawQuery(sql, selectionArgs);
+        while (cursor.moveToNext()) {
+            AnnouncementInfo info = new AnnouncementInfo();
+            String id = cursor.getString(cursor.getColumnIndex("id"));
+            String title = cursor.getString(cursor.getColumnIndex("title"));
+            String a_time = cursor.getString(cursor.getColumnIndex("a_time"));
+            String href = cursor.getString(cursor.getColumnIndex("href"));
+            String post_time = cursor.getString(cursor.getColumnIndex("post_time"));
+
+            info.setId(id);
+            info.setTitle(title);
+            info.setA_time(a_time);
+            info.setPost_time(post_time);
+            info.setHref(href);
+
+            infos.add(info);
+        }
+
+        return infos;
+    }
+
+
+    public AnnouncementInfo getNewInfo(String ids) {
+        openDB();
+
+
+        String[] selectionArgs = new String[]{ids};
+        String sql = "SELECT * FROM announcement where id= ?";
+        Cursor cursor = dbObj.rawQuery(sql, selectionArgs);
+        AnnouncementInfo info = new AnnouncementInfo();
+        while (cursor.moveToNext()) {
+            String desc = cursor.getString(cursor.getColumnIndex("a_desc"));
+
+            info.setA_desc(desc);
+
+        }
+
+        return info;
     }
 
 

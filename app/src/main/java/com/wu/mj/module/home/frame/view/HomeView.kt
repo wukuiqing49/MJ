@@ -3,19 +3,31 @@ package com.wu.mj.module.home.frame.view
 import android.content.Context
 import android.text.TextUtils
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.wkq.base.frame.mosby.delegate.MvpView
+import com.wkq.lib_base.adapter.KtDataBindingAdapter
 import com.wu.common.base.HomeTopBean
 import com.wu.common.base.adapter.MoveTopAdapter
 import com.wu.common.module.ui.WebViewActivity
+import com.wu.common.module.ui.WebViewPActivity
 import com.wu.common.utils.AlertUtil
 import com.wu.common.utils.SharedPreferencesHelper
 import com.wu.mj.R
+import com.wu.mj.module.home.frame.model.AnnouncementInfo
 import com.wu.mj.module.home.ui.activity.ChapterListActivity
+import com.wu.mj.module.home.ui.activity.WebViewNewsActivity
+import com.wu.mj.module.home.ui.adapter.ExamAnnouncementAdapter
+import com.wu.mj.module.home.ui.adapter.TopLineAdapter
 import com.wu.mj.module.home.ui.fragment.HomeFragment
-import com.youth.banner.indicator.CircleIndicator
-import com.youth.banner.indicator.RoundLinesIndicator
+import com.wu.mj.utlis.DBUtlis
+import com.youth.banner.Banner
 import com.youth.banner.listener.OnBannerListener
+import com.youth.banner.transformer.AlphaPageTransformer
+import com.youth.banner.transformer.RotateUpPageTransformer
+import com.youth.banner.transformer.ZoomOutPageTransformer
 import com.youth.banner.util.BannerUtils
+import com.youth.banner.util.LogUtils
 
 /**
  *
@@ -50,10 +62,27 @@ class HomeView : MvpView, View.OnClickListener {
 
         mFragment.binding.tvDays.setText(days.toString())
 
+        mFragment.binding.bannerHot.setAdapter(TopLineAdapter(DBUtlis(mFragment.activity).getNews("hot")))
+                .setOrientation(Banner.VERTICAL)
+                .setPageTransformer(AlphaPageTransformer())
+                .setOnBannerListener(OnBannerListener<AnnouncementInfo> { data: AnnouncementInfo, position: Int ->
+                    WebViewNewsActivity.newInstance(mFragment.activity as Context, data.id, data.title)
+                })
+
+        mFragment.binding.rvNews.layoutManager = LinearLayoutManager(mFragment.activity)
+        var mAdapter = ExamAnnouncementAdapter(mFragment.activity as Context, R.layout.item_exam_annnouncement)
+        mFragment.binding.rvNews.adapter = mAdapter
+
+        mAdapter.setOnViewClickListener(object : KtDataBindingAdapter.OnAdapterViewClickListener<AnnouncementInfo> {
+            override fun onViewClick(v: View?, program: AnnouncementInfo?) {
+                WebViewActivity.newInstance(mFragment.activity as Context, program?.href, program?.title)
+            }
+        })
+        mAdapter.addItems(DBUtlis(mFragment.activity).getNews("new").toMutableList())
+
     }
 
     private fun initBannerData() {
-
         var topInfos: MutableList<HomeTopBean> = ArrayList()
         var topQh = HomeTopBean();
         topQh.url = "http://www.cfachina.org/"
