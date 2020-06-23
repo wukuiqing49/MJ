@@ -66,7 +66,7 @@ class UpDateUserNameView : MvpView {
         var right=toolbar.addRightTextButton("提交",R.id.done);
         right.setTextColor(mActivity.resources.getColor(R.color.color_white))
         right.setOnClickListener {
-            if (TextUtils.isEmpty(mActivity.binding.etName.text)){
+            if (!TextUtils.isEmpty(mActivity.binding.etName.text)){
                 mActivity.presenter.startTimer()
             }else{
                 showMessage("请输入要修改的昵称")

@@ -36,14 +36,14 @@ class AboutView : MvpView {
 
     fun initView() {
         initToolBar("关于我们")
-        mActivity.binding.rlSupport.setOnClickListener { joinQQGroup("mdSrZGBrHPBX6dJjlJ7zKGi-MThOac9N") }
+        mActivity.binding.rlSupport.setOnClickListener { joinQQGroup("mdSrZGBrHPBX6dJjlJ7zKGi-hOac9N") }
         mActivity.binding.rlEmail.setOnClickListener {
             //获取剪贴板管理器：
             //获取剪贴板管理器：
             val cm: ClipboardManager? = mActivity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
 // 创建普通字符型ClipData
             // 创建普通字符型ClipData
-            val mClipData = ClipData.newPlainText("Label", "1571478933@163.com")
+            val mClipData = ClipData.newPlainText("Label", "1571478988@163.com")
 // 将ClipData内容放到系统剪贴板里。
             // 将ClipData内容放到系统剪贴板里。
             cm?.setPrimaryClip(mClipData)

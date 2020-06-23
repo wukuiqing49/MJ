@@ -15,7 +15,7 @@ import com.wu.mj.R
 import com.wu.mj.module.launch.ui.activity.LaunchActivity
 import com.wu.mj.module.login.ui.activity.LoginActivity
 import com.wu.mj.module.main.ui.activity.MainActivity
-import com.wu.mj.utlis.DBUtlis
+import com.wu.mj.utlis.MAsyncTask
 
 
 /**
@@ -29,6 +29,7 @@ class LaunchView : MvpView {
 
     var mContext: LaunchActivity
 
+
     constructor(mContext: LaunchActivity) {
         this.mContext = mContext
     }
@@ -38,7 +39,8 @@ class LaunchView : MvpView {
                 , mContext.permissionsREAD,
                 mContext.REQUEST_CODE_LAUNCH)
         if (hasPermission) {
-            mContext.presenter.startTimer(3000)
+            MAsyncTask(mContext).execute()
+//            mContext.presenter.startTimer(3000)
         }
     }
 
@@ -148,6 +150,4 @@ class LaunchView : MvpView {
         if (mContext == null || TextUtils.isEmpty(message)) return
         AlertUtil.showDeftToast(mContext, message)
     }
-
-
 }

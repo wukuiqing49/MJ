@@ -53,8 +53,8 @@ class MineView : MvpView, View.OnClickListener {
 
         if (DataBaseUtils.getUser(mFragment.activity) != null) {
             mFragment.binding.tvName.setText(DataBaseUtils.getUser(mFragment.activity).userName)
+            Glide.with(mFragment).load(DataBaseUtils.getUser(mFragment.activity).userIcon).apply(request).into(mFragment.binding.ivIcon)
         }
-        Glide.with(mFragment).load(DataBaseUtils.getUser(mFragment.activity).userIcon).apply(request).into(mFragment.binding.ivIcon)
 
 
     }
@@ -99,7 +99,12 @@ class MineView : MvpView, View.OnClickListener {
                 mFragment.presenter.startTimer()
             }
             R.id.rl_user -> {
-                UserInfoDetailActivity.newInstance(mFragment.activity as Context)
+                if (DataBaseUtils.isLogin(mFragment.activity as Context)) {
+                    UserInfoDetailActivity.newInstance(mFragment.activity as Context)
+                } else {
+                    LoginActivity.newInstance(mFragment.activity as Context)
+                }
+
             }
             R.id.cd_login -> {
                 logout()
