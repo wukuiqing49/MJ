@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.wu.mj.module.home.frame.model.ChapterInfo" />
+            type="com.wu.mjvv.module.home.frame.model.ChapterInfo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -18,7 +18,7 @@ android {
 
     def appName = "Movie"
     defaultConfig {
-        applicationId "com.wu.mj"
+        applicationId "com.wu.mjvv"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
@@ -29,15 +29,15 @@ android {
 
     signingConfigs {
         debugConfig {
-            storeFile file("order.jks")
+            storeFile file("mjvvjks.jks")
             storePassword "wu199149"
-            keyAlias "orderjks"
+            keyAlias "mjvvjks"
             keyPassword "wu199149"
         }
         releaseConfig {
-            storeFile file("order.jks")
+            storeFile file("mjvvjks.jks")
             storePassword "wu199149"
-            keyAlias "orderjks"
+            keyAlias "mjvvjks"
             keyPassword "wu199149"
         }
     }
@@ -122,6 +122,8 @@ dependencies {
     implementation project(path: ':lib_database')
     implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
     implementation 'com.ypx.yimagepicker:androidx:3.1.4'
+    implementation(name:'skipupdate-release', ext:'aar')
+
 
     //马甲
 //    implementation 'com.just.agentweb:agentweb:4.1.3'

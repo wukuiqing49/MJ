@@ -1,0 +1,6 @@
+
+打包步骤
+1:keytool -genkey -v -keystore mjvvjks.jks -alias mjvvjks   -storepass wu199149 -keypass wu199149 -keyalg rsa -validity 14000
+
+
+2:keytool -importkeystore -srckeystore mjvvjks.jks -destkeystore mjvvjks.jks -deststoretype pkcs12

@@ -3,7 +3,7 @@
 <data>
     <variable
         name="data"
-        type="com.wu.mj.module.home.frame.model.QuestionInfo" />
+        type="com.wu.mjvv.module.home.frame.model.QuestionInfo" />
 </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

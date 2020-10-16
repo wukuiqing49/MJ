@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.wu.mj">
+    package="com.wu.mjvv">
 
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -24,7 +24,7 @@
 
 
     <application
-        android:name=".application.QKApplication"
+        android:name="com.wu.mjvv.application.QKApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -37,7 +37,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.wu.mj.fileprovider"
+            android:authorities="com.wu.mjvv.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -51,7 +51,7 @@
             android:required="false" />
 
         <activity
-            android:name="com.wu.mj.module.launch.ui.activity.LaunchActivity"
+            android:name="com.wu.mjvv.module.launch.ui.activity.LaunchActivity"
             android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -64,22 +64,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".module.main.ui.activity.MainActivity"
+            android:name="com.wu.mjvv.module.main.ui.activity.MainActivity"
             android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".module.login.ui.activity.LoginActivity"
-            android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            tools:ignore="LockedOrientationActivity" />
-        <activity
-            android:name=".module.login.ui.activity.RegistActivity"
+            android:name="com.wu.mjvv.module.login.ui.activity.LoginActivity"
             android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -87,7 +79,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".module.home.ui.activity.ChapterListActivity"
+            android:name="com.wu.mjvv.module.login.ui.activity.RegistActivity"
             android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -95,16 +87,15 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".module.home.ui.activity.QuestionsInfoActivity"
+            android:name="com.wu.mjvv.module.home.ui.activity.ChapterListActivity"
             android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustResize"
             tools:ignore="LockedOrientationActivity" />
-
         <activity
-            android:name=".module.home.ui.activity.InfoWebViewActivity"
+            android:name="com.wu.mjvv.module.home.ui.activity.QuestionsInfoActivity"
             android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -113,7 +104,16 @@
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name=".module.home.ui.activity.ResultActivity"
+            android:name="com.wu.mjvv.module.home.ui.activity.InfoWebViewActivity"
+            android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            tools:ignore="LockedOrientationActivity" />
+
+        <activity
+            android:name="com.wu.mjvv.module.home.ui.activity.ResultActivity"
             android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -121,7 +121,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".module.home.ui.activity.WebViewNewsActivity"
+            android:name="com.wu.mjvv.module.home.ui.activity.WebViewNewsActivity"
             android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -129,7 +129,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".module.mine.ui.activity.UserInfoDetailActivity"
+            android:name="com.wu.mjvv.module.mine.ui.activity.UserInfoDetailActivity"
             android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -137,7 +137,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".module.mine.ui.activity.UpDateUserNameActivity"
+            android:name="com.wu.mjvv.module.mine.ui.activity.UpDateUserNameActivity"
             android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -145,7 +145,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".module.mine.ui.activity.FeedbackActivity"
+            android:name="com.wu.mjvv.module.mine.ui.activity.FeedbackActivity"
             android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -153,7 +153,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".module.mine.ui.activity.AboutActivity"
+            android:name="com.wu.mjvv.module.mine.ui.activity.AboutActivity"
             android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -161,7 +161,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".module.launch.ui.activity.ForceUpdateActivity"
+            android:name="com.wu.mjvv.module.launch.ui.activity.ForceUpdateActivity"
             android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -169,7 +169,7 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".module.launch.ui.activity.H5Activity"
+            android:name="com.wu.mjvv.module.launch.ui.activity.H5Activity"
             android:configChanges="keyboardHidden|screenSize|orientation|smallestScreenSize|screenLayout"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"

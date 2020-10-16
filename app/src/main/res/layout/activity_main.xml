@@ -18,7 +18,7 @@
 
             android:layout_marginBottom="53dp" />
 
-        <com.wu.mj.module.main.ui.widget.QMUITabSegment
+        <com.wu.mjvv.module.main.ui.widget.QMUITabSegment
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="53dp"
