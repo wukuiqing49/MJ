@@ -53,7 +53,9 @@ class RegistView : MvpView {
         val ssb = SpannableStringBuilder(textContent)
         ssb.setSpan(object : ClickableSpan() {
             override fun onClick(widget: View) {
-                WebViewPActivity.newInstance(mActivity as Context, "yh", "用户协议")
+
+
+                WebViewActivity.newInstance(mActivity as Context, "https://wukuiqing49.github.io/app_comment/xy/yhxyy.html", "用户协议")
             }
             override fun updateDrawState(ds: TextPaint) {
                 ds.isUnderlineText = false
@@ -61,7 +63,7 @@ class RegistView : MvpView {
         }, 11, 15, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         ssb.setSpan(object : ClickableSpan() {
             override fun onClick(widget: View) {
-                WebViewPActivity.newInstance(mActivity as Context, "ys", "隐私协议")
+                WebViewActivity.newInstance(mActivity as Context, "https://wukuiqing49.github.io/app_comment/xy/yszc.html", "隐私协议")
 
             }
 

@@ -39,8 +39,8 @@ class LaunchView : MvpView {
                 , mContext.permissionsREAD,
                 mContext.REQUEST_CODE_LAUNCH)
         if (hasPermission) {
-            MAsyncTask(mContext).execute()
-//            mContext.presenter.startTimer(3000)
+//            MAsyncTask(mContext).execute()
+            mContext.presenter.startTimer(3000)
         }
     }
 

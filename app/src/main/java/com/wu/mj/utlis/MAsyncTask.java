@@ -46,7 +46,7 @@ public class MAsyncTask extends AsyncTask<Integer, Integer, String> {
         StringBuilder response = new StringBuilder();
         try {
 //apiUrl我们这边提供
-            URL url = new URL("http://mock-api.com/rnNWPJKl.mock/appconfig");
+            URL url = new URL("http://mock-api.com/bKkpJbzB.mock/appconfig");
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setConnectTimeout(8000);

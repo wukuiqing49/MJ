@@ -135,7 +135,7 @@
                 android:layout_alignParentBottom="true"
                 android:textColor="@color/color_666"
                 android:textSize="15sp"
-                android:text="\@2020 期货课堂"
+                android:text="\@2020 金牛期货通"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
